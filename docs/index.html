@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-CZceb_kH.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-Bam3NpBI.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-C_DwAp7Z.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-CEsLFVD9.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-D5MAsWEG.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-C6PDArdf.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>TrainingWorkshop</title>
+    <script type="module" crossorigin src="./assets/index-C5WESBbZ.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BPPi7vOr.js">
+    <link rel="modulepreload" crossorigin href="./assets/objects-CrbstYTV.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-C4rtOYze.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-C60yClUi.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-DnimoHo0.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-3wZU7vFS.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-DpNnLPuE.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-CGJY8D9C.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-DQz5N1zm.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DzliDDTm.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-DLY285WP.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-BUmTS76K.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-Dz_KRrWq.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-DCUzRj2J.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-D28DMr4y.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-W__YVea9.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-Ba2zmJWD.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-CrevbcR_.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-B8lIBnFI.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CFnrytEJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-B8oVfJNp.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-CyyJPf_5.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-4y-nyVDU.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-CPo-KTTe.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-C9LWGQ7Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-DjpWVza6.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-GCVIknuR.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-BUdrueMv.js">
+    <link rel="modulepreload" crossorigin href="./assets/isObject-DvLSfCY5.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-Dqg6_6m7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_initCloneObject-7OOScFCJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-BK1opWhR.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-BIDX-mZr.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-C8Yt16Y7.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-DifUxsbZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-D-SddyN0.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-CP7vq682.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-EoJoeZuK.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-e9lSomwA.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-6TRSC3VZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-B9zEd_sW.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DDwuYzlC.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-C2dwX-sI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-CwCyrmDf.js">
+    <link rel="modulepreload" crossorigin href="./assets/arrays-UzzAzxsG.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-DmKKoXrM.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-DNBWPkeJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-CHeZxy51.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-C1MhlItJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-D5zczhUD.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CeF1Em5L.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Di6rD-vJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DanVWUek.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BVNaV53g.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BrqkjqDe.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-5bwTcyKs.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BPoMypmC.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Bm9PT5P9.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BbqPy6oS.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-BGrE-q7N.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-QOk09NqD.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-Bwm8T4QC.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-DCKmcMBz.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-BT6B8Bon.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-CsYTPAhW.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-DhnxH9Rh.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-n8PGHE18.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-DTFqEQb0.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-PEowR7op.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-D58nBaNf.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-D_kB5FIu.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-WU4x2UpK.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BlgD22u_.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-DtSpUdpO.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-CouFQxI2.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BJMN4ll3.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-xxZlcf11.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-Bl6X9B5M.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-BN98e517.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-Dxj31V4A.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-D26WjdN1.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-DjP9S1hr.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-CHWQT4zh.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-C9ZBG6Lx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-DWGvf_Bw.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-BeU4kHTI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-BpZ_0Xuz.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-HCSOwOwk.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-DlR5UiIE.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-Cn8LzPNx.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-X9kskQZ0.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-DZgUyqAK.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-ByxLiTvP.js">
+    <link rel="modulepreload" crossorigin href="./assets/hat-glasses-xLTnAC_n.js">
+    <link rel="modulepreload" crossorigin href="./assets/package-ROei-DG7.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparkles-DwqcWrJl.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-BVdFtnJz.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-B392qglD.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-DfXRjba3.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-DPUCy0Ep.js">
+    <link rel="modulepreload" crossorigin href="./assets/tree-actions-DUAdNn1i.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-Cj3eM5bt.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-BsXiWo0v.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-BTlyH5K_.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BcvSvTUt.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-DUvRReKp.js">
+    <link rel="modulepreload" crossorigin href="./assets/micromark-factory-space-D4wN6pqE.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-B4N_BMo6.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-BjuEVUOa.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-D5LtSvbN.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-BPfggvql.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-B96fOqfH.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-D93OkQw8.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-_oAlkvj6.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-xPvP31p3.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-DBacdN1t.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-d0-XOKtd.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-CydJsDOc.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-Y4n-X10o.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-orJ4dPbF.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BmtlFqSa.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CZTDC2tF.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-BiFDv3jB.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-C59xfSYt.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-Cxnn3tJh.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-icons.esm-CsgEZOQ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/RSPContexts-oeZyXDWd.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-FVnUU4--.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-CUbXmdb-.js">
+    <link rel="modulepreload" crossorigin href="./assets/external-link-C8y9rFms.js">
+    <link rel="modulepreload" crossorigin href="./assets/message-circle-DJwyqZtq.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-r1QITpsJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-BLxp8uxj.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-CLaR27oP.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-DnrBQBRT.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-eb23KpAk.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-ypIvDL4C.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-NeCHOv2Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-BLap3eAk.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-BwSNDWAP.js">
+    <link rel="modulepreload" crossorigin href="./assets/radio-group-5KDs5aO1.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-Vqr5D17R.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-CDT2KH2g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-DfWeGRFv.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-RBKN8Dn2.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-BV8otm7e.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-BjKz3ZV1.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-BjlLTeSV.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-Dvcyi0uu.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-V3puz20c.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-CPoJAfgx.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-c5Zh8BM8.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BKW9TqBu.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DuxuLRGI.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-DehVzRp6.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-Ci7n55A9.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-BOFHwHn7.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-Bb1JVuzT.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-Bn1AMfsk.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-neWzNbg7.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CRSnWxLR.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-C6HKXhBl.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-CgN_4RAl.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-export-D-ZHIs71.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CbFVGT0j.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-D0D7HkQV.js">
+    <link rel="modulepreload" crossorigin href="./assets/semaphore-X3ApuO41.js">
+    <link rel="modulepreload" crossorigin href="./assets/fileToBase64-CBP8Y0AP.js">
+    <link rel="modulepreload" crossorigin href="./assets/pathUtils-BCwK34YQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-BH1URye0.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-dmMPFhRH.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasPath-D0QK37mF.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-DrYqVooW.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-Q2hMHnmn.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-COekUbUT.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-C2tUp3NL.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-DVd8Y612.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-DGiOSARf.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-DTvm8QXy.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-BE1kpmPF.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-BQtz7-np.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-WoaGtlKd.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "# /// script\n# requires-python = \"\u003E=3.13\"\n# dependencies = [\n#     \"marimo\u003E=0.23.3\",\n# ]\n# ///\n\nimport marimo\n\n__generated_with = \"0.24.0\"\napp = marimo.App()\n\n\n@app.cell\ndef _():\n    import marimo as mo\n\n    mo.md(\n        \"\"\"\n    \u003Cdiv style=\"display:flex; justify-content:space-between; align-items:flex-start; gap:24px;\"\u003E\n      \u003Cdiv\u003E\n        \u003Ch1\u003ETraining Workshop on Data Science and AI Tools for Beginners\u003C/h1\u003E\n        \u003Cp\u003E\u003Cstrong\u003E30 September 2026 \u00b7 Bayes Business School, City St George's, University of London\u003C/strong\u003E\u003C/p\u003E\n      \u003C/div\u003E\n      \u003Cimg\n        src=\"img/BayesCityStGeorge's_logoNoBkgd.png\"\n        alt=\"Bayes City St George's logo\"\n        style=\"width:160px; height:auto; object-fit:contain;\"\n      /\u003E\n    \u003C/div\u003E\n    \"\"\"\n    )\n    return (mo,)\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(r\"\"\"\n    \u003C!--\n    # Training Workshop on Data Science and AI Tools for Beginners\n\n    **30 September 2026 \u00b7 Bayes Business School, City St George's, University of London**\n    --\u003E\n\n    ## Why These Tools Matter\n\n    This workshop introduces a connected toolkit for modern research. Here's what you'll explore and how each piece fits together:\n\n    - **Python** \u2014 A beginner-friendly, general-purpose programming language and the backbone of most data science work. It's the language used to write web scrapers, run NLP analyses, and build the demo code you'll see throughout the day.\n    - **R** \u2014 A language built specifically for statistics and data analysis. Many researchers use it alongside Python; learning both gives you flexibility depending on your discipline's conventions.\n    - **GitHub Copilot** \u2014 An AI coding assistant that suggests code as you type. It lowers the barrier to writing Python/R by helping you self-learn syntax and troubleshoot, making it the ideal companion for beginners tackling the other tools on this list.\n    - **Web scraping** \u2014 The practice of automatically extracting data from websites, typically written in Python. It's often the first step in a research pipeline, feeding raw text into later NLP analysis.\n    - **Web crawling** \u2014 A related technique for systematically navigating and collecting pages across a website (rather than a single page), often used to gather large datasets before scraping extracts the specific content you need.\n    - **Natural Language Processing (NLP)** \u2014 A field of techniques for analysing text data, frequently applied *after* scraping/crawling has collected raw material. Concepts like n-grams and lemmatization (below) are core NLP building blocks.\n    - **N-grams** \u2014 Sequences of adjacent words (or characters) used to capture patterns in text, a foundational technique within NLP for tasks like language modelling or text classification.\n    - **Lemmatization** \u2014 The process of reducing words to their base/dictionary form (e.g., \"running\" \u2192 \"run\"), a common text pre-processing step in NLP that improves the accuracy of downstream analysis.\n    - **Jupyter** \u2014\n    - **marimo/Jupyter** \u2014 Jupyter is an interactive notebook environment for writing and running Python/R code alongside notes and outputs, widely used for exploratory data science and demos. marimo is a newer, reactive alternative to Jupyter, designed to make notebooks more robust and reproducible, addressing various limitations of Jupyter.\n    - **VS Code** \u2014 A popular code editor that integrates with GitHub Copilot, Jupyter notebooks, and cloud environments like Codespaces, making it a natural hub for the whole workflow.\n    - **GitHub** \u2014 A platform for storing, sharing, and version-controlling code, and the account you'll need to access GitHub Copilot and Codespaces.\n    - **Codespaces** \u2014 GitHub's cloud-based development environment, letting you run VS Code, Python/R, and your scraping/NLP code entirely in the browser, without installing anything locally.\n    - **Lightning.ai** \u2014 A cloud computing platform providing free-tier compute for running your code, useful when your laptop isn't powerful enough for larger data science or AI tasks.\n\n    Together, these tools form a pipeline: **write and edit code (VS Code, Jupyter/marimo) \u2192 get AI assistance (GitHub Copilot) \u2192 run it in the cloud (Codespaces, Lightning.ai) \u2192 collect data (web scraping/crawling) \u2192 analyse it (NLP, n-grams, lemmatization) \u2192 manage and share it all (GitHub, Python/R)**.\n\n    ---\n\n    ## Training Workshop on Data Science and AI Tools for Beginners\n\n    ### 30 September 2026\n\n    Curious about **Python**, **R**, **GitHub Copilot**, **web scraping**, natural language processing (NLP) or related tools/techniques \u2014 but haven't had a chance to try them out yet? Maybe you've also heard of tools/platforms like **Jupyter**, **marimo**, **VS Code**, **Codespaces**, **GitHub**, **Lightning.ai**, or techniques and concepts like **web crawling**, **n-grams**, **lemmatization** but they still feel a bit out of reach?\n\n    Then this *beginner-friendly, hands-on* workshop is for you! In just one day, you'll get to explore some of these tools and techniques that can facilitate your research. *No prior experience with Python or R is required* \u2014 just curiosity and a willingness to try something new!\n\n    We'll guide you through with demo code and show you how AI coding assistants (like GitHub Copilot) can help you along the way. By the end of the day, you'll have taken your first steps into using these tools to support your research.\n\n    ### Workshop Arrangement\n\n    This one-day workshop is organised and delivered by [Dr Andrew Yim](#), Bayes Business School, City St George's, University of London and supported by the Pathway and Thematic training funding from the SeNSS/SENSS Student Cohort Development Fund (SCDF). Attendees are required to **bring their own laptops**. The workshop will be held in the Bayes Business School Building at 106 Bunhill Row, London.\n\n    Attendees will have hands-on experience in using various data science and AI tools through cloud computing environments. They are required to do advanced preparation, including signing up for **free-tier** accounts on the following platforms (**at least a week before** the workshop):\n\n    - [education.github.com/pack](https://education.github.com/pack)\n      - Follow the sequence: Sign up for Student Developer Pack \u2192 Create an account \u2192 Sign up for GitHub (using school email address). Do **NOT** use the 'Continue with Google/Apple' options to sign up, because a school email address facilitates claiming GitHub Education benefits.\n      - See details at [docs.github.com/en/education/about-github-education/github-education-for-students](https://docs.github.com/en/education/about-github-education/github-education-for-students)\n    - [lightning.ai/pricing](https://lightning.ai/pricing) (Follow the sequence: Get started free/Start free \u2192 (school) Email)\n\n    ### Target Audience\n\n    This is a training workshop for beginners, with minimal to no prior experience, who see the relevance and importance of using data science tools for their research and using AI tools to self-learn/assist coding for research. This is **not** suitable for those who have already used the mentioned tools and techniques on a regular basis.\n\n    Priority will be given to **SENSS/SeNSS students** who can benefit most from the workshop. Unfilled places will be offered to unfunded students from **SENSS/SeNSS institutions**: [senss.ac.uk/about](https://www.senss.ac.uk/about).\n\n    ### Further Details\n\n    - **Places:** limited to a maximum of 40 attendees\n    - **Time:** begins 9:30am, finishes by 6:30pm on the scheduled date\n    - **Venue postcode:** EC1Y 8TZ\n    - **Cost:** free to registered participants (a sandwich lunch will be served); attendees cover their own travel and accommodation costs\n    - Registrants failing to attend the workshop may be blacklisted for future events held by the organiser\n\n    ### Application\n\n    Please email a CV and a brief description about the below to Dr Andrew Yim ([a.yim@citystgeorges.ac.uk](mailto:a.yim@citystgeorges.ac.uk)) by the deadline on **31 August 2026**:\n\n    - Your research direction(s)\n    - Why data science and AI tools are important / relevant to your research\n    - Your expectation on how this workshop might benefit your research\n    - Your affiliation: (a) SENSS / (b) SeNSS / (c) unfunded students of SENSS/SeNSS institutions\n    - Your year of study in PhD programme\n\n    **Acceptance notification will be sent by 14 September 2026.**\n    \"\"\")\n    return\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script>
+<marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.13%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22marimo%3E%3D0.23.3%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.24.0%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%3Cdiv%20style%3D%22display%3Aflex%3B%20justify-content%3Aspace-between%3B%20align-items%3Aflex-start%3B%20gap%3A24px%3B%22%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3Ch1%3ETraining%20Workshop%20on%20Data%20Science%20and%20AI%20Tools%20for%20Beginners%3C%2Fh1%3E%0A%20%20%20%20%20%20%20%20%3Cp%3E%3Cstrong%3E30%20September%202026%20%C2%B7%20Bayes%20Business%20School%2C%20City%20St%20George's%2C%20University%20of%20London%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Cimg%0A%20%20%20%20%20%20%20%20src%3D%22img%2FBayesCityStGeorge's_logoNoBkgd.png%22%0A%20%20%20%20%20%20%20%20alt%3D%22Bayes%20City%20St%20George's%20logo%22%0A%20%20%20%20%20%20%20%20style%3D%22width%3A160px%3B%20height%3Aauto%3B%20object-fit%3Acontain%3B%22%0A%20%20%20%20%20%20%2F%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%3C!--%0A%20%20%20%20%23%20Training%20Workshop%20on%20Data%20Science%20and%20AI%20Tools%20for%20Beginners%0A%0A%20%20%20%20**30%20September%202026%20%C2%B7%20Bayes%20Business%20School%2C%20City%20St%20George's%2C%20University%20of%20London**%0A%20%20%20%20--%3E%0A%0A%20%20%20%20%23%23%20Why%20These%20Tools%20Matter%0A%0A%20%20%20%20This%20workshop%20introduces%20a%20connected%20toolkit%20for%20modern%20research.%20Here's%20what%20you'll%20explore%20and%20how%20each%20piece%20fits%20together%3A%0A%0A%20%20%20%20-%20**Python**%20%E2%80%94%20A%20beginner-friendly%2C%20general-purpose%20programming%20language%20and%20the%20backbone%20of%20most%20data%20science%20work.%20It's%20the%20language%20used%20to%20write%20web%20scrapers%2C%20run%20NLP%20analyses%2C%20and%20build%20the%20demo%20code%20you'll%20see%20throughout%20the%20day.%0A%20%20%20%20-%20**R**%20%E2%80%94%20A%20language%20built%20specifically%20for%20statistics%20and%20data%20analysis.%20Many%20researchers%20use%20it%20alongside%20Python%3B%20learning%20both%20gives%20you%20flexibility%20depending%20on%20your%20discipline's%20conventions.%0A%20%20%20%20-%20**GitHub%20Copilot**%20%E2%80%94%20An%20AI%20coding%20assistant%20that%20suggests%20code%20as%20you%20type.%20It%20lowers%20the%20barrier%20to%20writing%20Python%2FR%20by%20helping%20you%20self-learn%20syntax%20and%20troubleshoot%2C%20making%20it%20the%20ideal%20companion%20for%20beginners%20tackling%20the%20other%20tools%20on%20this%20list.%0A%20%20%20%20-%20**Web%20scraping**%20%E2%80%94%20The%20practice%20of%20automatically%20extracting%20data%20from%20websites%2C%20typically%20written%20in%20Python.%20It's%20often%20the%20first%20step%20in%20a%20research%20pipeline%2C%20feeding%20raw%20text%20into%20later%20NLP%20analysis.%0A%20%20%20%20-%20**Web%20crawling**%20%E2%80%94%20A%20related%20technique%20for%20systematically%20navigating%20and%20collecting%20pages%20across%20a%20website%20(rather%20than%20a%20single%20page)%2C%20often%20used%20to%20gather%20large%20datasets%20before%20scraping%20extracts%20the%20specific%20content%20you%20need.%0A%20%20%20%20-%20**Natural%20Language%20Processing%20(NLP)**%20%E2%80%94%20A%20field%20of%20techniques%20for%20analysing%20text%20data%2C%20frequently%20applied%20*after*%20scraping%2Fcrawling%20has%20collected%20raw%20material.%20Concepts%20like%20n-grams%20and%20lemmatization%20(below)%20are%20core%20NLP%20building%20blocks.%0A%20%20%20%20-%20**N-grams**%20%E2%80%94%20Sequences%20of%20adjacent%20words%20(or%20characters)%20used%20to%20capture%20patterns%20in%20text%2C%20a%20foundational%20technique%20within%20NLP%20for%20tasks%20like%20language%20modelling%20or%20text%20classification.%0A%20%20%20%20-%20**Lemmatization**%20%E2%80%94%20The%20process%20of%20reducing%20words%20to%20their%20base%2Fdictionary%20form%20(e.g.%2C%20%22running%22%20%E2%86%92%20%22run%22)%2C%20a%20common%20text%20pre-processing%20step%20in%20NLP%20that%20improves%20the%20accuracy%20of%20downstream%20analysis.%0A%20%20%20%20-%20**Jupyter**%20%E2%80%94%0A%20%20%20%20-%20**marimo%2FJupyter**%20%E2%80%94%20Jupyter%20is%20an%20interactive%20notebook%20environment%20for%20writing%20and%20running%20Python%2FR%20code%20alongside%20notes%20and%20outputs%2C%20widely%20used%20for%20exploratory%20data%20science%20and%20demos.%20marimo%20is%20a%20newer%2C%20reactive%20alternative%20to%20Jupyter%2C%20designed%20to%20make%20notebooks%20more%20robust%20and%20reproducible%2C%20addressing%20various%20limitations%20of%20Jupyter.%0A%20%20%20%20-%20**VS%20Code**%20%E2%80%94%20A%20popular%20code%20editor%20that%20integrates%20with%20GitHub%20Copilot%2C%20Jupyter%20notebooks%2C%20and%20cloud%20environments%20like%20Codespaces%2C%20making%20it%20a%20natural%20hub%20for%20the%20whole%20workflow.%0A%20%20%20%20-%20**GitHub**%20%E2%80%94%20A%20platform%20for%20storing%2C%20sharing%2C%20and%20version-controlling%20code%2C%20and%20the%20account%20you'll%20need%20to%20access%20GitHub%20Copilot%20and%20Codespaces.%0A%20%20%20%20-%20**Codespaces**%20%E2%80%94%20GitHub's%20cloud-based%20development%20environment%2C%20letting%20you%20run%20VS%20Code%2C%20Python%2FR%2C%20and%20your%20scraping%2FNLP%20code%20entirely%20in%20the%20browser%2C%20without%20installing%20anything%20locally.%0A%20%20%20%20-%20**Lightning.ai**%20%E2%80%94%20A%20cloud%20computing%20platform%20providing%20free-tier%20compute%20for%20running%20your%20code%2C%20useful%20when%20your%20laptop%20isn't%20powerful%20enough%20for%20larger%20data%20science%20or%20AI%20tasks.%0A%0A%20%20%20%20Together%2C%20these%20tools%20form%20a%20pipeline%3A%20**write%20and%20edit%20code%20(VS%20Code%2C%20Jupyter%2Fmarimo)%20%E2%86%92%20get%20AI%20assistance%20(GitHub%20Copilot)%20%E2%86%92%20run%20it%20in%20the%20cloud%20(Codespaces%2C%20Lightning.ai)%20%E2%86%92%20collect%20data%20(web%20scraping%2Fcrawling)%20%E2%86%92%20analyse%20it%20(NLP%2C%20n-grams%2C%20lemmatization)%20%E2%86%92%20manage%20and%20share%20it%20all%20(GitHub%2C%20Python%2FR)**.%0A%0A%20%20%20%20---%0A%0A%20%20%20%20%23%23%20Training%20Workshop%20on%20Data%20Science%20and%20AI%20Tools%20for%20Beginners%0A%0A%20%20%20%20%23%23%23%2030%20September%202026%0A%0A%20%20%20%20Curious%20about%20**Python**%2C%20**R**%2C%20**GitHub%20Copilot**%2C%20**web%20scraping**%2C%20natural%20language%20processing%20(NLP)%20or%20related%20tools%2Ftechniques%20%E2%80%94%20but%20haven't%20had%20a%20chance%20to%20try%20them%20out%20yet%3F%20Maybe%20you've%20also%20heard%20of%20tools%2Fplatforms%20like%20**Jupyter**%2C%20**marimo**%2C%20**VS%20Code**%2C%20**Codespaces**%2C%20**GitHub**%2C%20**Lightning.ai**%2C%20or%20techniques%20and%20concepts%20like%20**web%20crawling**%2C%20**n-grams**%2C%20**lemmatization**%20but%20they%20still%20feel%20a%20bit%20out%20of%20reach%3F%0A%0A%20%20%20%20Then%20this%20*beginner-friendly%2C%20hands-on*%20workshop%20is%20for%20you!%20In%20just%20one%20day%2C%20you'll%20get%20to%20explore%20some%20of%20these%20tools%20and%20techniques%20that%20can%20facilitate%20your%20research.%20*No%20prior%20experience%20with%20Python%20or%20R%20is%20required*%20%E2%80%94%20just%20curiosity%20and%20a%20willingness%20to%20try%20something%20new!%0A%0A%20%20%20%20We'll%20guide%20you%20through%20with%20demo%20code%20and%20show%20you%20how%20AI%20coding%20assistants%20(like%20GitHub%20Copilot)%20can%20help%20you%20along%20the%20way.%20By%20the%20end%20of%20the%20day%2C%20you'll%20have%20taken%20your%20first%20steps%20into%20using%20these%20tools%20to%20support%20your%20research.%0A%0A%20%20%20%20%23%23%23%20Workshop%20Arrangement%0A%0A%20%20%20%20This%20one-day%20workshop%20is%20organised%20and%20delivered%20by%20%5BDr%20Andrew%20Yim%5D(%23)%2C%20Bayes%20Business%20School%2C%20City%20St%20George's%2C%20University%20of%20London%20and%20supported%20by%20the%20Pathway%20and%20Thematic%20training%20funding%20from%20the%20SeNSS%2FSENSS%20Student%20Cohort%20Development%20Fund%20(SCDF).%20Attendees%20are%20required%20to%20**bring%20their%20own%20laptops**.%20The%20workshop%20will%20be%20held%20in%20the%20Bayes%20Business%20School%20Building%20at%20106%20Bunhill%20Row%2C%20London.%0A%0A%20%20%20%20Attendees%20will%20have%20hands-on%20experience%20in%20using%20various%20data%20science%20and%20AI%20tools%20through%20cloud%20computing%20environments.%20They%20are%20required%20to%20do%20advanced%20preparation%2C%20including%20signing%20up%20for%20**free-tier**%20accounts%20on%20the%20following%20platforms%20(**at%20least%20a%20week%20before**%20the%20workshop)%3A%0A%0A%20%20%20%20-%20%5Beducation.github.com%2Fpack%5D(https%3A%2F%2Feducation.github.com%2Fpack)%0A%20%20%20%20%20%20-%20Follow%20the%20sequence%3A%20Sign%20up%20for%20Student%20Developer%20Pack%20%E2%86%92%20Create%20an%20account%20%E2%86%92%20Sign%20up%20for%20GitHub%20(using%20school%20email%20address).%20Do%20**NOT**%20use%20the%20'Continue%20with%20Google%2FApple'%20options%20to%20sign%20up%2C%20because%20a%20school%20email%20address%20facilitates%20claiming%20GitHub%20Education%20benefits.%0A%20%20%20%20%20%20-%20See%20details%20at%20%5Bdocs.github.com%2Fen%2Feducation%2Fabout-github-education%2Fgithub-education-for-students%5D(https%3A%2F%2Fdocs.github.com%2Fen%2Feducation%2Fabout-github-education%2Fgithub-education-for-students)%0A%20%20%20%20-%20%5Blightning.ai%2Fpricing%5D(https%3A%2F%2Flightning.ai%2Fpricing)%20(Follow%20the%20sequence%3A%20Get%20started%20free%2FStart%20free%20%E2%86%92%20(school)%20Email)%0A%0A%20%20%20%20%23%23%23%20Target%20Audience%0A%0A%20%20%20%20This%20is%20a%20training%20workshop%20for%20beginners%2C%20with%20minimal%20to%20no%20prior%20experience%2C%20who%20see%20the%20relevance%20and%20importance%20of%20using%20data%20science%20tools%20for%20their%20research%20and%20using%20AI%20tools%20to%20self-learn%2Fassist%20coding%20for%20research.%20This%20is%20**not**%20suitable%20for%20those%20who%20have%20already%20used%20the%20mentioned%20tools%20and%20techniques%20on%20a%20regular%20basis.%0A%0A%20%20%20%20Priority%20will%20be%20given%20to%20**SENSS%2FSeNSS%20students**%20who%20can%20benefit%20most%20from%20the%20workshop.%20Unfilled%20places%20will%20be%20offered%20to%20unfunded%20students%20from%20**SENSS%2FSeNSS%20institutions**%3A%20%5Bsenss.ac.uk%2Fabout%5D(https%3A%2F%2Fwww.senss.ac.uk%2Fabout).%0A%0A%20%20%20%20%23%23%23%20Further%20Details%0A%0A%20%20%20%20-%20**Places%3A**%20limited%20to%20a%20maximum%20of%2040%20attendees%0A%20%20%20%20-%20**Time%3A**%20begins%209%3A30am%2C%20finishes%20by%206%3A30pm%20on%20the%20scheduled%20date%0A%20%20%20%20-%20**Venue%20postcode%3A**%20EC1Y%208TZ%0A%20%20%20%20-%20**Cost%3A**%20free%20to%20registered%20participants%20(a%20sandwich%20lunch%20will%20be%20served)%3B%20attendees%20cover%20their%20own%20travel%20and%20accommodation%20costs%0A%20%20%20%20-%20Registrants%20failing%20to%20attend%20the%20workshop%20may%20be%20blacklisted%20for%20future%20events%20held%20by%20the%20organiser%0A%0A%20%20%20%20%23%23%23%20Application%0A%0A%20%20%20%20Please%20email%20a%20CV%20and%20a%20brief%20description%20about%20the%20below%20to%20Dr%20Andrew%20Yim%20(%5Ba.yim%40citystgeorges.ac.uk%5D(mailto%3Aa.yim%40citystgeorges.ac.uk))%20by%20the%20deadline%20on%20**31%20August%202026**%3A%0A%0A%20%20%20%20-%20Your%20research%20direction(s)%0A%20%20%20%20-%20Why%20data%20science%20and%20AI%20tools%20are%20important%20%2F%20relevant%20to%20your%20research%0A%20%20%20%20-%20Your%20expectation%20on%20how%20this%20workshop%20might%20benefit%20your%20research%0A%20%20%20%20-%20Your%20affiliation%3A%20(a)%20SENSS%20%2F%20(b)%20SeNSS%20%2F%20(c)%20unfunded%20students%20of%20SENSS%2FSeNSS%20institutions%0A%20%20%20%20-%20Your%20year%20of%20study%20in%20PhD%20programme%0A%0A%20%20%20%20**Acceptance%20notification%20will%20be%20sent%20by%2014%20September%202026.**%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <script data-marimo="true">
+      Object.defineProperty(window, "__MARIMO_MOUNT_CONFIG__", {
+        value: Object.freeze({
+            "filename": "notebook.py",
+            "cwd": "",
+            "lspWorkspace": null,
+            "mode": "read",
+            "version": "0.24.0",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "enabled": true, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "auto_close_pairs": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "code_lens": true, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "show_tracebacks": false, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": true},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        }),
+        writable: false,
+        configurable: false,
+      });
+    </script>
+  </body>
+</html>
