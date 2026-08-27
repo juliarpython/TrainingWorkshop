@@ -23,7 +23,7 @@ def _():
         <p><strong>30 September 2026 · Bayes Business School, City St George's, University of London</strong></p>
       </div>
       <img
-        src="img/BayesCityStGeorge's_logoNoBkgd.png"
+        src="public/BayesCityStGeorge's_logoNoBkgd.png"
         alt="Bayes City St George's logo"
         style="width:160px; height:auto; object-fit:contain;"
       />
