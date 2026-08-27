@@ -1,4 +1,4 @@
-<img src="BayesCityStGeorge's_logoNoBkgd.png" alt="Bayes City St George's logo" style="float: right; width: 180px; margin: 0 0 1rem 1rem;" />
+<img src="BayesCityStGeorges_logoNoBkgd.png" alt="Bayes City St George's logo" style="float: right; width: 180px; margin: 0 0 1rem 1rem;" />
 
 # Training Workshop on Data Science and AI Tools for Beginners
 
