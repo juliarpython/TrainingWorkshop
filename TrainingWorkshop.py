@@ -54,7 +54,6 @@ def _(mo):
     - **Natural Language Processing (NLP)** — A field of techniques for analysing text data, frequently applied *after* scraping/crawling has collected raw material. Concepts like n-grams and lemmatization (below) are core NLP building blocks.
     - **N-grams** — Sequences of adjacent words (or characters) used to capture patterns in text, a foundational technique within NLP for tasks like language modelling or text classification.
     - **Lemmatization** — The process of reducing words to their base/dictionary form (e.g., "running" → "run"), a common text pre-processing step in NLP that improves the accuracy of downstream analysis.
-    - **Jupyter** —
     - **marimo/Jupyter** — Jupyter is an interactive notebook environment for writing and running Python/R code alongside notes and outputs, widely used for exploratory data science and demos. marimo is a newer, reactive alternative to Jupyter, designed to make notebooks more robust and reproducible, addressing various limitations of Jupyter.
     - **VS Code** — A popular code editor that integrates with GitHub Copilot, Jupyter notebooks, and cloud environments like Codespaces, making it a natural hub for the whole workflow.
     - **GitHub** — A platform for storing, sharing, and version-controlling code, and the account you'll need to access GitHub Copilot and Codespaces.
