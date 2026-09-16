@@ -1,0 +1,830 @@
+---
+title: "Guide on Group and Individual Project Assignments"
+# Use knit's custom function to specify output directory
+# Note: The code below avoids using a regex with quote characters (which collide when flattened to a single-quoted line),
+    # knit: (function(inputFile, encoding) {
+    #       out_dir <- 'html';
+    #       if(!file.exists(out_dir)) { dir.create(out_dir) };
+    #       base_name <- tools::file_path_sans_ext(basename(inputFile));
+    #       out_file <- paste0(base_name, '.html');
+    #       rmarkdown::render(inputFile,
+    #                         encoding = encoding,
+    #                         output_dir = file.path(dirname(inputFile), out_dir),
+    #                         output_file = out_file)
+    #       })
+output:
+  html_document:
+    theme: null
+    self_contained: true
+
+# 2. QUARTO CONFIGURATION 
+# (Overrules global revealjs default in _quarto.yml)
+format:
+  html:
+    theme: none            # Quarto's equivalent to "theme: null"
+    embed-resources: true  # Quarto's equivalent to "self_contained: true"
+---
+
+<style>
+  /* This hides the title  */
+  h1.title { display: none; }
+  /* This sets the font */
+  body, p, ul, ol, td, th, div {
+    font-family: Helvetica, Arial, sans-serif, "Segoe UI", -apple-system, BlinkMacSystemFont !important;
+    font-size: 12pt !important; /* 16px or 20px or 24px */
+    line-height: 1.5 !important;
+    color: #24292e !important;
+  }
+    h1, h2, h3, h4 {
+    font-family: Helvetica, Arial, sans-serif, "Segoe UI", -apple-system, BlinkMacSystemFont !important;
+  }
+
+@media print {
+body, p, ul, ol, td, th, div {
+    font-size: 16pt !important;   /* standard print size */
+}
+}
+
+/* Without `width: 100%;`, the absolute width of a table is determined by the absolute length of the header divider while the column width is determined by the relative length of the column divider. */
+  table {
+/*    width: 100%; */   
+    border-collapse: collapse;
+  }
+  th, td {
+    /* border: 1px solid black; */
+    border: 3px solid lightgrey;       /* light grey, GitHub table style */
+    padding: 6px 12px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+
+# Note: Ctrl-Shift-K to knit the .Rmd file to a self-contained .html file
+knitr::opts_chunk$set(include=FALSE, echo = FALSE, message = FALSE, warning = FALSE)
+options(scipen = 999) # high penalty for scientific notation
+
+#library(tidyverse)
+
+```
+
+
+```{r set-parameters, include=FALSE}
+
+groupFormation_deadline <- "23:59, **February 5** Thursday"
+groupProject_deadline <- "23:59, **March 10** Tuesday"
+indivProject_deadline <- "23:59, **April 14** Tuesday"
+
+guide_Group_URL <- "https://moodle4.city.ac.uk/course/section.php?id=301848"
+guide_Indiv_URL <- "https://moodle4.city.ac.uk/course/section.php?id=301847"
+slides_27_28 <- "slides 27-28"
+Week11_slides_URL <- "https://moodle4.city.ac.uk/course/section.php?id=296122"
+groupwork_youtube <- "http://www.youtube.com/watch?v=e2dcCtjfD80"
+
+invitation_group_repo <- "https://classroom.github.com/a/hU2BDDDZ"
+github_ecosystem_section <- "https://moodle4.city.ac.uk/course/section.php?id=303785"
+marimo_limitations <- "https://docs.marimo.io/guides/wasm/?h=public#limitations"
+Extensions_LateSubmissions_Policy <- "https://staffhub.city.ac.uk/__data/assets/pdf_file/0004/893020/Extensions-and-Late-Submissions-Policy.pdf"
+
+GPU_machine <- "https://www.google.com/search?q=Is+there+any+consumer+computer+equiped+with+RTX+A2000+%2812GB%29+that+has+similar+capability+as+the+low-end+T4+GPU%3F+Prices+of+computers+with+these+GPUs%3F&udm=50" 
+
+github_eduBenefits_URL <- "https://github.com/settings/education/benefits"
+alt_AIs_section <- "https://moodle4.city.ac.uk/course/section.php?id=304770"
+lecture_capture_URL <- "https://moodle4.city.ac.uk/mod/lti/view.php?id=1196130"
+module_outline_URL <- "https://moodle4.city.ac.uk/course/section.php?id=296126"
+
+```
+
+<hr>
+
+# AF1204 - Guide on Group and Individual Project Assignments
+
+This guide consolidates all essential information about the group and individual project assignments for this module. It includes grading criteria, submission requirements, technical instructions, and support resources to help you succeed.
+
+
+## 1. Assessment Overview
+
+This module is assessed via two project assignments. Both components require the use of Python, its packages (especially `marimo`), and tools in the GitHub ecosystem introduced during the module.
+
+| Component | Weighting | Due Date | Submission Platform |
+| :---- | :--- | :-------- | :--------- |
+| **Group Project** | 50% | **Week 7:** `r groupProject_deadline` | Moodle (Written Report) & <br>GitHub (Code) |
+| **Individual Project** | 50% | **Week 12:** `r indivProject_deadline` | Moodle (Video Report) & <br>GitHub (Code) |
+
+---
+
+## 2. Group Project Assignment (50%)
+
+### Objective
+Collaborate to create a single **interactive dashboard** using S&P 500 company financials and/or stock data.
+
+### Group Formation
+- Groups are **5 members** each.
+- Sign-up deadline is `r groupFormation_deadline`.
+    - Self-sign-up on Moodle
+    - **Non-sign-ups** were manually allocated to **unfilled vacancies of self-formed groups** with less than 5 members
+
+### Deliverables & Submission Requirements
+
+**1. The Written Report (Submitted to Moodle)**
+
+- **Length:** Maximum 1,500 words.
+- **Content:** Describe how the group utilized coding/data skills (from the module or self-exploration) to prepare data, visualize it, and create the interactive dashboard.
+- **Format Options:** You must submit the report in **one** of the following formats:
+    - **(Option A)** An HTML file exported directly from a Marimo notebook.
+    - **(Option B)** A PDF file produced via MS Word or similar software.
+- **WARNING:** Do **NOT** submit a pdf file printed from a marimo-exported html file because certain visible contents of the exported file might not be printable to a pdf file
+- **Further details:** See section 7.1
+
+**2. Supporting Code (Made available on GitHub)**
+
+- **Location:** The root directory of the main branch of your designated **Group Repository** (e.g., `project-group99`)
+- **Requirement:** <span style="color:red;">Working Python code in a marimo notebook that generates the interactive dashboard described in your report</span>
+- **Commit History:** You must <span style="color:red;">save work regularly</span>. The group’s independent work is evidenced by a consistent Git commit history from group members
+
+---
+
+## 3. Individual Project Assignment (50%)
+
+### Objective
+Create a **personal portfolio webpage** demonstrating your data literacy skills.
+
+### Deliverables & Submission Requirements
+
+**1. The Video Report (Submitted to Moodle)**
+
+- **Length:** Maximum **3 minutes**
+- **Format:** MP4 video file
+- **Content:** A "showcase" of your portfolio webpage. The video must include:
+    - Narration (voiceover explaining the work)
+    - Screen recording of the device exploring the webpage
+    - **Picture-in-Video:** Your face must be visible (e.g., a webcam bubble/window) throughout the presentation to verify identity
+- **Focus:** Highlight specific features that demonstrate skills acquired from the module (Weeks 1-10) or self-exploration of closely related tools and techniques. Articulate your technical journey in a way suitable for potential employers
+* **Further details:** See section 7.2
+
+**2. Supporting <span style="color:red;">Webpage (Accessible at default URL)</span> and Code (Made available on GitHub)**
+
+- **Webpage**
+    - **Default URL:** In the format of `https://bayesug-ai.github.io/repoAF1204-[yourGitHubUsername]`, where `[yourGitHubUsername]` is the GitHub username indicated in the filename of the submitted video file: <span style="color:red;">`[StudentEmailAddress]_[StudentIDNumber]_[yourGitHubUsername].mp4`</span> (replacing the `[]` placeholders by your actual student email address, student ID number, and GitHub username)
+    - **Requirement:** <span style="color:red;">Webpage can be successfully loaded and is working in every aspect as described and seen in the video</span>
+- **Code**  
+    - **Location:** The root directory of the main branch of your **personal forked module repository** (specifically the repo with `repoAF1204-[yourGitHubUsername]`)
+    - **Requirement:** Working Python code in marimo notebook(s) that generates the portfolio webpage
+
+---
+
+## 4. Assessment & Grading Criteria
+
+The written report (Group) and video report (Individual) are the primary documents read/watched for grading. However, lecturers may review the supporting Python code on GitHub to assess the independence and validity of the work.
+
+Marks are awarded based on the skills demonstrated in the written / video report. The following tables summarise the requirements for each mark range.
+
+| **Group Project** Mark Range &nbsp; | Required Competencies |
+|:-----|:-----------------|
+| 40–60 | Coding and data skills covered in Week 1 to 4. |
+| 61–75 | All of the above, plus basic additional skills from self-exploration of closely related tools and techniques for any week(s). |
+| 76+ | All of the above, plus enhanced additional skills from self-exploration of closely related tools and techniques for any week(s). |
+
+| **Indiv. Project** Mark Range | Required Competencies |
+|:-----|:-----------------|
+| 40–60 | Coding and data skills covered in Week 1 to 4. |
+| 61–75 | All of the above, plus **at least one** of:  <br>(i) additional skills from self-exploration of closely related tools and techniques for any week(s); <br>(ii) skills covered in Week 6 and 10. |
+| 76+ | All of the above, plus skills covered in Week 7 to 9 AND additional skills from self-exploration of closely related tools and techniques for any week(s). |
+
+_**Note**: Within each mark range, students who **more convincingly demonstrate higher competence** in their written/video report will earn marks **closer to the upper end** of that range._
+
+---
+
+## 5. Academic Integrity & AI Policy
+
+- **Independent Work:** Submissions must be your own (or your group's own).
+- **AI Usage:** You are **encouraged** to use AI tools (e.g., GitHub Copilot) as learning partners. However, you must:
+    - Understand the AI-suggested solutions.
+    - Exercise judgment to accept/reject/revise suggestions.
+    - Be able to explain or reproduce the work independently if asked.
+- **Contract Cheating:** Strictly prohibited. Never use third parties to produce work for you.
+- **Evidence:** "Version control history" (commit logs) will be reviewed as part of integrity verification. A lack of meaningful commit history (for example, a project appearing in a single upload) may be considered supporting evidence that the work was not completed incrementally by the student. Students must ensure their work leaves an appropriate **digital trail** within the GitHub environment.
+
+---
+
+## 6. How to Create Your Video Report (Step-by-Step)
+
+You need to record your screen, your voice, and your face simultaneously. The resulting file must be an **MP4**.
+
+### Test your equipment:
+- Microphone: Ensure clear audio capture
+- Webcam: Position so your face is well-lit and visible
+- Screen resolution: Set to 1920x1080 if possible for best quality
+
+
+
+### Option A: Using Zoom (Recommended for University Accounts)
+
+
+1.  **Open Zoom** and start a **"New Meeting"** (with just yourself in it).
+2.  **Turn on your Camera** so your face is visible in the meeting window.
+3.  Click the **"Share Screen"** button at the bottom.
+4.  Select the specific window (browser) showing your Portfolio Webpage and click **Share**.
+    - *Note: By default, Zoom places your video feed in a floating window on top of the shared screen.*
+5.  Hover over the meeting controls (usually at the top of the screen), click **"More" (...)**, and select **"Record on this Computer"**.
+6.  **Start presenting!** Navigate through your portfolio while narrating. Keep an eye on the time (Max 3 mins).
+7.  When finished, click **"Stop Recording"** in the controls.
+8.  Click **"End Meeting for All"**.
+9.  Zoom will automatically convert the recording. Once finished, it will open the folder containing your file (usually named `zoom_0.mp4`). **Rename this file** before uploading to Moodle.
+
+### Option B: Using Loom (Easiest Free Alternative)
+*Loom is a browser-based tool specifically designed for screen+cam recording. It is very beginner-friendly.*
+
+1.  Go to [loom.com](https://loom.com) and sign up for a free account.
+2.  Install the **Loom Chrome Extension** (or desktop app).
+3.  Open your Portfolio Webpage in your browser.
+4.  Click the Loom icon. Ensure the settings are:
+    - **Screen and Camera** (selected).
+    - **Microphone audio** (on).
+5.  You will see a circular "bubble" with your face in the corner. You can move this bubble so it doesn't block important content.
+6.  Click **"Start Recording"**.
+7.  Present your work. When done, click the **Stop** button (square).
+8.  Loom will open your video in a browser. Click the **Download** button to save the **MP4 file** to your computer.
+9.  Upload this MP4 file to Moodle.
+
+---
+
+
+## 7. Quick Reference Checklist
+
+### 7.1 Group Project Checklist
+
+- Accept the GitHub Classroom invitation for your group repo: `r invitation_group_repo`
+- Coordinate with your group and divide tasks
+- Build a single **interactive** dashboard using S&P 500 data, based on the Week 4 marimo notebook templates and coding techniques from Week 1-4
+- **Commit** your individual contributions **regularly** to the group repo
+- Check all links, visualisations, and interactive elements in the **dashboard notebook** to ensure they function correctly
+    - Confirm the notebook can be **run as a web app** (see instructions in the Week 4 marimo notebook)
+- Prepare the written report (&le; 1,500 words) in the correct format (HTML exported from marimo, or PDF printed from Word)
+- The beginning of the report should show the **project group number**, the **<span style="color:red;">filename of the interactive dashboard notebook</span>** in the **main** branch of your group repo, and **each <span style="color:red;">active</span> group member's student ID and school email address**. (Exclude **inactive** members, who are those with insignificant or nocontribution.)
+    - _Note:_ Active group members will receive the same mark for the group project. Inactive members will receive a zero mark for the group project.
+- Name the file in the format of `group[XX]_Project.html` or `group[XX]_Project.pdf` (replacing the `[XX]` placeholder by the actual group number, e.g., `99`)
+- Ensure the **notebook** that generated the interactive dashboard is in The root directory of the main branch of the group GitHub repo (e.g., `project-group99`)
+- Submit the report on **Moodle** by `r groupProject_deadline`
+
+### 7.2 Individual Project Checklist
+
+- Build a personal portfolio webpage based on the Week 4 marimo notebook templates 
+    - Ensure the webpage is working fully in every aspect according to your design and **reachable at its default URL** (in the format of `https://bayesug-ai.github.io/repoAF1204-[yourGitHubUsername]`)
+    - <span style="color:red;">Ensure the URL of the webpage can be clearly seen in the screen recorded in the submitted video file</span>
+- **Commit** your work in progress **regularly** to your personal forked repo
+- Record a 3-minute **MP4** video with **narration**, **screen recording**, and **picture-in-picture** (PiP) webcam (e.g., using Zoom or Loom)
+- Verify the MP4 file: audio, screen <span style="color:red;">(with visible webpage URL)</span>, and PiP webcam all present; duration ≤ 3 minutes
+- Name the file in the format of `[StudentEmailAddress]_[StudentIDNumber]_[yourGitHubUsername].mp4` (replacing the `[]` placeholders by your actual student email address, student ID number, and GitHub username)
+- Ensure the **notebook** that generated the webpage is in The root directory of the main branch of your personal forked GitHub repo (with `repoAF1204-`) 
+- <span style="color:red;">Ensure the **<span style="color:red;">webpage</span>** <span style="color:red;">can be successfully loaded at its default URL (in the format of `https://bayesug-ai.github.io/repoAF1204-[yourGitHubUsername]`)</span>
+- Submit the MP4 video on **Moodle** `r indivProject_deadline`
+
+
+---
+
+## 8. Support and Further Information
+
+If you have questions about the assignments, please attend the **drop-in helpdesk sessions** available in Weeks 6–10, 11/12:
+
+| Session | Format | Day & Time | Location |
+|:----------------------|:------------|:----------------------|:-----------|
+| Drop-in helpdesk 01 | In-person | Monday 11:00–11:50 | 2001 |
+| Drop-in helpdesk 02 | In-person | Monday 15:00–15:50 | 1001 |
+| Drop-in helpdesk 03 | Online | Tuesday 09:00–09:50 | via Zoom |
+
+For GitHub account setup and tools in the GitHub ecosystem, please also refer to the detailed information provided on Moodle: `r github_ecosystem_section`
+
+---
+
+## 9. FAQs
+
+### 9.0 Generally Applicable FAQs
+
+- _**I've exceeded the monthly usage budget for Codespaces. Is there an alternative way for me to continue my work on the assignmennt?**_
+
+    - Please read **all relevant FAQs** in section 9  of the Guide **concerning running out of credits**.
+
+
+- _**I have used up the monthly free credit allowance on GitHub but I am not comfortable providing my bank details to GitHub for purchasing credits. What alternatives do I have?**_
+    - FWIW, I ran into a similar situation and had provided my Revolut card details to pay for a subscription. I paid for a pay-as-you-go subscription and added only as much an amount as necessary in my Revolut account to allow payment to GitHub. Since that incident, I managed my usage very carefully and had not run into the same situation again. I also reverted the budget limit back to zero so that GitHub would stop my usage once I hit the monthly allowance (you must raise the budget limit beyond 0 to allow usage once the monthly allowance is reached, and to raise the limit, you must provide a payment method). But the zero budget limit has not been binding since I learned to manage my allowance well. 
+    - Additionally, you can explore molab and lightning.ai as alternative code development environments. See relevant entries in section 9 FAQs of the [Guide](`r guide_Indiv_URL`). In the Week 10 session, I also mentioned the alternative of a locally installed environment. Watch the part of the lecture recording concerning VS Code. However, this requires a user to have much higher technical background to be able to do it successfully.
+    - The alternative environments allow you to develop the marimo notebook for generating the ultimate webpage. Successfully running the marimo notebook as a web app using the `mairmo run` command is necessary (not sufficient) for the webpage to work when exported as html-wasm. Eventually, you must upload the developed marimo notebook back to your GitHub repo, fire up a Codespace to export the notebook in html-wasm to the `docs` folder, commit the changes back to the GitHub repo, go through the steps to enable the default URL of the webpage, and verify whether it could be successfully loaded. 
+
+
+- _**I have uncommitted changes in a Codespace created from my repo. Because the credit allowance for this month has been used up, I can no longer reactivate the Codespace to get back the files with the uncommitted changes. The Codespace will be auto-deleted in a few days. What should I do?**_
+    - This situation highlights the importance of committing changes regularly and ensuring all changes have been committed before you let a Codespace sleep. If you had, all the changed files are now in your branch of the group project repo. 
+    - The only potential rescue I could think of is an export option on the Codespaces dashboard page that might be relevant -- though I am not 100% sure it does serve your purpose here. Anyway, give it a try.
+    - ![](img/ExportOption.jpeg){width=50%}
+
+
+- _**My GitHub Codespace usage limit has run out, and my account indicates it won't reset until the next calendar month begins. Is there an alternative method or setup you recommend that lets me continue using GitHub Codespaces to work on the module assignments?**_
+    - There's not much you can do when it gets to this stage. All the free GitHub services go under a total credit allowance. When it is exhausted, you have to wait until the allowance is replenished in the next monthly cycle. 
+        - Given the total credit allowance, you cannot use Codespaces as virtual computers beyond certain hours. The total number of hours available is also affected by the sizes of the Codespaces you have created and kept. The storage usage is on a storage-hour basis in terms of how it consumes the credit allowance. Deleting unused Codespaces can stop bleeding but it won't change the fact that previously credits were wasted on keeping unused Codespaces.
+    - Going forward, please consider keeping an eye on the usage from time to time and having a read of the documentation on the pricing for different things: Codespaces storage cost, Copilot, etc. See those pages in the screenshots attached below. I guess some of your slept Codespaces might have taken up a portion of your storage allowance. It is a good practice to actively delete unused Codespaces and refrain from creating new ones unless absolutely necessary.  
+    - Not sure relevant in this particular case but have you followed [the advice to apply for additional Education benefits from GitHub](`r github_ecosystem_section`)?
+        - _Follow the instructions on [this page](`r github_eduBenefits_URL`) to apply for **GitHub Education benefits for verified students**:_
+            - _Verified students can receive Copilot Pro for free, 180 monthly Codespaces hours for cloud coding, unlimited private repositories with GitHub Pro or Team, and dozens of premium tools in the GitHub Student Developer Pack._
+            - (_Note_: It can take over five working days to obtain the approval for the additional benefits even if all the required documents are submitted properly.)
+    - A potential short-term workaround: 
+        - Try whether you are able to use a personal email address to register for another GitHub account.
+        - If you have a second GitHub account, you can invite the second you as a collaborator to your branch of the group repo. Click `Accept` from the collaboration invitation email. Start a Codespace from the repo in a browser where the second you has logged in GitHub by default. I believe the usage should then count under the second you. 
+    - Worst comes to worst, you might want to consider the paid subscription option. 
+    - You can also try using **molab** as an alternative platform but the environment is quite different, and we have not tested the module notebooks on that platform.
+        - [Announcing molab | marimo](https://marimo.io/blog/announcing-molab): 
+            - https://molab.marimo.io/
+    - ![](img/GitHubBilling1.png){width=100%}
+    - ![](img/GitHubBilling2.png){width=100%}
+    - ![](img/GitHubBilling3.png){width=100%}
+
+
+- _**I can't talk to the github copilot AI anymore. It says I have to upgrade to the plus version. What should I do?**_
+    1. Don't waste AI resources. If an AI cannot fix an issue within 3 iterations, give up the change and try something else. Please also read other relevant FAQs in section 9 of this Guide.
+    2. Use cheaper models for simpler tasks to conserve credits. Those with &times;3 mean more powerful models consuming 3 times the credits of a regular model (&times;1). There should be cheaper or even free models (&times;0.25 and &times;0).
+    3. Try alternative AI providers described in this Moodle section: `r alt_AIs_section`
+    4. Going forward, keep up with your learning on a weekly basis so that you consume the monthly credit allowance for AI gradually to prevent hitting the cap like this. 
+    5. If you could afford (and have used up the limited free allowances elsewhere too), pay for one-month subscription of GitHub Copilot (if they have this option)
+
+
+- _**We already learned how to use GitHub Codespaces. Why is it useful to learn to use Lightning.ai as an alternative cloud computing platform for working on the module assignments?**_
+    - 4-core CPU sessions on _Lightning.ai_ are entirely free up to the first 4 hours of a session. If you remember to put a Studio (the equivalent of a GitHub Codespace) into sleep at the end of a 4-hour session and then put it back on to refresh the free status, effectively you have free use of 4-core CPU sessions “as long as you want”. 
+        - In that sense, you will never run out of credits on _Lightning.ai_ and can reserve the monthly 15 free credits on this platform for up to 75 hours of GPU usage -- which otherwise is only available to owners of [a machine of over £1,200](`r GPU_machine`).
+
+
+- _**Whenever I try to commit changes and sync my work, the error message in the screenshot below pops up. What should I do?**_ ![](img/File_conflicts_redacted.png){width=100%}
+    - The situation could be a consequence of changing the same file through different channels without always committing back to the repo immediately. For example, at 9:00 on a day you changed a file in the Codespace created from a repo without committing the change back to the repo. At 14:00, you went to the GitHub repo page and directly edited the same file. At 18:00, you worked with the Codespace again and decided to sync your changes in that file back to the repo. At that point, the file in the repo was changed at 14:00, whereas the same file in the Codespace was changed at 18:00. The version controlling system (Git) was not sure which version you really want to keep and therefore would require you to take actions to clearly indicate how you would like the changes to be integrated together. Usually, this would require an interaction with the Git system using the command line interface (cli) to handle properly. The Git Log contains hints on the git commands for consideration. Following through this path requires some technical knowledge on your side. 
+    - The exact cause of your case might be different but this is obviously a file conflict situation. A tedious but easy-to-follow approach to resolving the issue is to download all the latest versions of the changed files from the Codespace to your device and then directly upload them back to the GitHub repo. 
+        - In the Explorer panel, you can right-click on each file in concern and select Download from the pop-up dropdown menu to download it to your own pc. 
+        - Open your GitHub repo page, click on the 'Add file' button next to the green 'Code' button and select 'Upload files'. 
+    - When you upload a copy of the same filename to the repo, you give the permission to replace the existing copy. When this is done, all your files in the repo is up-to-date. From thereon, create a new Codespace to continue your work (and delete the old Codespace that could not be synced) and maintain a good practice of always committing changed files back to the repo at the end of each work session. 
+
+
+- _**I accidentally deleted my code. When I try to do it from the start, it keeps giving me this `redefined variable` error (see the screenshot). What should I do?**_ ![](img/RedefinedVariableError.jpg){width=100%}
+    - First of all, make sure there is not another cell in which you also have the `import micropip` statement because this would redefine the object `micropip` &mdash; a <span style="color:red;">**marimo don't**</span> (see a [Week 11 slide](`r Week11_slides_URL`)) &mdash; and cause the error. If there is, you can simply delete the `import micropip` statement in the other cell to fix the issue.
+    - If the above had been confirmed but the error persisted, maybe marimo got confused **due to some cache in the sandbox created**. You can try the below to see whether it can fix the issue:
+        - Save your notebook with a new filename.
+        - Alternatively, first create a new marimo notebook, next use `Ctrl-A` to select all cells in the old notebook and  `Ctrl-C` to copy them. Then go to the newly created notebook and use `Ctrl-V` to paste the copied cells into the new notebook. Save the changes in the new notebook. 
+        - The kernel of the new notebook should not have been selected yet. Set the kernel to `marimo sandbox`, which would then be rebuilt. 
+        - The `redefined variable` error might go away after the sandbox is rebuilt. 
+
+
+- _**I already know how to use Streamlit to create a web app. May I use it instead of the required marimo notebook to finish the module assignments?**_
+    - If a module teaches Chinese Medicine, students should not be allowed to pass the module by proving that they can cure patients with Western Medicine. Similarly, C++ code cannot be used for passing a module teaching Javascript. 
+    - FWIW, Gemini has the following opinions on whether Streamlit is better than marimo:  
+        - While Streamlit is more popular and excels at rapid, linear app development, marimo offers superior performance through reactive execution and a more flexible development workflow.
+        - **Key Performance Differences**
+            - Execution Model: Streamlit reruns your entire script from top to bottom on every interaction, which can lead to lag in larger apps. Marimo uses a directed acyclic graph (DAG) to rerun only the cells that depend on a changed variable, making it significantly faster.
+            - **State Management**: Streamlit requires explicit use of `st.session_state` to persist data across reruns. Marimo manages state naturally through its reactive variables, reducing boilerplate code.
+        - **Workflow and Versatility**
+            - **Notebook-First**: Marimo is a reactive notebook that can be deployed as an app, meaning you don't have to rewrite code from a prototype (like Jupyter) into a separate app framework.
+            - **Deployment Options**: Marimo files can be run as web apps, executed as standard Python scripts, or even exported to WASM for serverless browser execution.
+            - **SQL Integration**: Marimo has native SQL support, allowing you to query dataframes directly with SQL cells and have the results flow back into Python. 
+
+
+- _**Since I ran out of the credit allowance for using Codespaces, I developed my code on a local host (http://localhost:2721/). This would not cause any issue, would it?**_
+    - I trust you can appreciate that there's not an easy way to verify students' work in their personal device; we have no access to your localhost. 
+    - Your assignment will be verified against files on your repo that are dated before the submission deadline (for late submissions, up to two days after the submission deadline). 
+    - Running out of credits to use a Codespace is not an excuse not to upload the marimo notebook developed in your local device back to your repo on a **daily basis**. 
+        - We have repeatedly emphasized the importance of **leaving a trail of your work**, including in the [Module Outline](`r module_outline_URL`) and the [Guide](`r guide_Group_URL`). 
+
+
+### 9.1 Group Project FAQs
+
+- _**What needs to be included in the Interactive Dashboard and the written group project report in order to achieve a high grade?**_
+    - Let me use a metaphor to explain the consideration. In the free skate segment of an ice-skating athlete’s program, the athlete selects movements to showcase their skills. However, neither a difficult movement that is poorly executed nor a trivial movement is likely to impress the panel of judges. Instead, the program must be built around elements that are among the most challenging the athlete can perform while still being executed with confidence and consistency.
+    - Returning to the context of the group project assignment, you should similarly select coding skills—whether learned in this module or through self-directed exploration of related tools and techniques—to showcase what you have learned. Using the interactive dashboard required by the assignment and within the approximately 1,500-word limit of the written group project report, **explain where** (for example, the Week 2 marimo notebook) **and, where relevant, how** (for example, through experimentation inspired by a blog post or YouTube video) **you learned these techniques**. You should place particular **emphasis on those skills that you found most challenging**.
+    - Please also refer to details in the document [Guide on Group and Individual Project Assignments](`r guide_Group_URL`) (especially, Section 4): 
+
+
+- _**I have created my own branch. Should I edit and extend the `Wk04w_Dashboard.py` file there directly, or creating a new file instead, to develop it into the final one to be merged back to the main branch later?**_
+    - In your own branch, save the file as another copy with a different name (hamburger button, File | Save as). When it has been fully developed and is ready to be merged back to the main branch, do it as a “merge pull request” as shown in a video provided on Moodle. Because the name of that file is unique in both branches, the “merge pull request” process should be straightforward. 
+
+
+- _**By collaboration in the group project assignment, do you mean simply separating the tasks among the group members like one for preparing the data, one for preparing the interactive features, one for writing up the report, etc?**_
+    - One important element of group work is **mutual monitoring**. The very reason why the University and the School wanted modules to incorporate group assignment is to give students the opportunities to experience the **challenges coming from group dynamics** and experiment with alternatives to overcome them. Because all the members are **jointly responsible for the group work outcome**, one should not assume things would necessarily work out smoothly without checking in with each other on progress from time to time to achieve good time management.
+    - Another important element of group work is **mutual learning**. Group assignments are not just about producing a final deliverable efficiently; they are also designed to help you learn from one another. Each member may bring different strengths, perspectives, and skills, and engaging with these differences can deepen everyone’s understanding of the subject. This means **discussing ideas together, explaining your approaches, asking questions, and giving constructive feedback** &mdash; not just working in isolated parts.
+    - In practice, effective collaboration usually involves a balance: **some division of tasks** for efficiency, combined with **regular communication, shared decision-making, and collective review of the work**. This helps ensure consistency, improves overall quality, and allows all members to contribute meaningfully to—and learn from—the entire project, not just their individual section.
+    - Please also see what could happen if one's contribution was disputed by other group members: 
+        - _Based on the evidence you provided for the purpose of "proving your significant contributions", I decided to adjust your mark to XX to reflect your contribution to the group work. Please refer to the attached documents for the basis of the decision._
+        - _In my email on February 18, I made clear that students "are expected to save their work in progress back to the Group repo from time to time ... You will be in a vulnerable position if your group mates dispute your contributions, and you cannot provide clear evidence to the contrary." The importance of a commit history was also reiterated multiple times in the Guide on Group and Individual Project Assignments._
+        - _You put yourself in a vulnerable position by only working on the report. You also gave up an opportunity to deepen the understanding of the skills you should have learned from the module._ 
+        - _While the outcome of the review may not be what you hoped for, I hope this experience helps you improve in the future._
+
+
+- _**I am not good at groupwork. What changes should I make to become better in working with strangers in groups? Can you suggest some YouTube videos for me to understand the topic better?**_
+    - We are in the AI age! I passed your questions to Gemini. It gave the following reply: 
+        - Working with strangers in a group project can definitely be a challenging experience, but making a few intentional changes to how you approach teamwork can make a massive difference. 
+        - Based on expert advice from the Beedie School of Business, here are some actionable changes you can make to become a better teammate when working with people you don't know:
+        * **Build Trust Early:** Before diving straight into the workload, try organizing a casual hangout with your group. Taking this small step helps build mutual respect and trust right from the beginning, which eases tension [[01:12](`r paste0(groupwork_youtube, "&t=72")`)].
+        * **Establish a "Group Contract":** Once you sit down to work, collaborate to create a simple agreement that outlines basic expectations, expected response times, and general ground rules. It is also highly recommended to set an ongoing, predictable meeting time so everyone can schedule around it [[01:26](`r paste0(groupwork_youtube, "&t=86")`)].
+        * **Divide Tasks by Strengths:** Don't just assign work randomly. Take a few minutes to figure out what each person excels at or enjoys doing. For example, assign the report editing to a strong writer, and the slide deck to someone with an eye for design [[01:52](`r paste0(groupwork_youtube, "&t=112")`)].
+        * **Avoid Over-Contributing:** When working with strangers, it can be tempting to take on the majority of the project yourself to ensure it gets done correctly. However, this often causes others to step back and contribute less. You have to give your team members the space and opportunity to do their share [[02:22](`r paste0(groupwork_youtube, "&t=142")`)].
+        * **Set Mini-Milestones:** Long group projects can feel grueling. Break the larger objective down into smaller, manageable milestones and celebrate or reward yourselves when you hit them to keep motivation high [[02:10](`r paste0(groupwork_youtube, "&t=130")`)].
+        * **Use Targeted Mini-Meetings:** You don't always need the entire group present to get work done. If two people are collaborating on a specific section, encourage them to meet up separately to accomplish their tasks more efficiently [[02:35](`r paste0(groupwork_youtube, "&t=155")`)].
+        * **Handle Conflict Constructively:** If a group member isn't delivering, don't immediately point fingers. Consider if there is a flaw in the group dynamic causing the bottleneck, and when you address it, use "we" language to focus on the issue rather than attacking the person [[03:04](`r paste0(groupwork_youtube, "&t=184")`)].
+        * **Document Contributions:** Keep clear records of who communicates what and who contributes which parts of the project. A great trick is to assign a specific text color to each person in your shared documents so their work is clearly identifiable [[02:46](`r paste0(groupwork_youtube, "&t=166")`)].
+        * **Recommended YouTube Video to Help You Further:** **[How to Deal With Difficult Group Project Members](`r groupwork_youtube`)** by *SFU Beedie School of Business* – This video humorously breaks down the different "types" of difficult team members (like procrastinators, the "dead weights," and self-appointed bosses) and offers excellent practical steps on how to structure a group project from the start so that you can work seamlessly with anyone. 
+
+
+- _**We attempted multiple times to contact the other members of our group but they have not replied to any of our messages. One of the members did eventually respond, but they asked what coursework we had to do, which suggests that they may not be aware of the assignment or its requirements. As the coursework is due next weekend, this has made it quite difficult for us to organize the work as a group. We wanted to ask for your guidance on how we should proceed.**_
+    - Thank you for letting me know. 
+    - Please proceed as if you have a project plan for everyone, assuming active participation by all members. Work with those members who responded to your call for collaboration to **prioritize tasks that are time-sensitive or essential** for moving the project forward. Leave secondary or supplementary tasks to be completed if other members join the collaboration effort later.
+    - Please also **keep dated records of the email correspondences related to group dynamics**, such as your calls for collaboration, responses to calls for group meetings, etc. In the first page of the written group project report to be submitted, **state clearly who has actively participated in and significantly contributed to the project and since when**.
+    - In assessing the project report, we the lecturers will consider the limitations you are facing and give you a group mark fairly adjusted for the circumstance. Rest assured that the challenging situation can also work in your favor to let you demonstrate your group management and project management talents that other groups might not have the opportunity to demonstrate.
+    - In your particular case, if I were you, I would assign late-joiners tasks that can let them contribute as much as possible given the late stages and given their states of mind/(lack of) readiness while ensuring the overall quality of the project. **Communicating to them the basis of your decisions in a respectful way**, allowing them to understand why the decisions are best to the group and fair to everyone.
+    - Please do not hesitate to let me know if you need further clarification on anything. Thanks.
+
+
+    <!--
+    Dear Students of Project Group ZZ, 
+
+    I understand that some of you have not responded to other group members' calls for collaboration.
+
+    Let me remind you that the group project assignment constitutes 50% of the overall module mark. Failing to participate actively may significantly affect your ability to pass the module. It is important to establish clear evidence proving your active participation and significant contribution to the group project collaboration. I strongly advise you to engage fully so that you can demonstrate your understanding and earn the marks you deserve.
+
+    Thank you for your attention and cooperation.
+
+    Best wishes,
+    Dr Yim
+    -->
+
+
+- _**I wanted to follow up on the dispute about my contribution to the group project. As a group, we agreed to split the work so that ABC and I worked on the report while others focused on the coding. I put together the first full draft of the report and worked alongside others to improve it to the final version. I can confirm I contributed significantly to the group project. Attached please find the link to the group report online, where you can see the version history. Please let me know if you need anything further.**_
+    - Based on the evidence you provided for the purpose of "proving your significant contributions", I decided to adjust your mark to XX to reflect your contribution to the group work. Please refer to the attached documents for the basis of the decision. 
+    - In my email on February 18, I made clear that students "are expected to save their work in progress back to the Group repo from time to time ... You will be **in a vulnerable position if your group mates dispute your contributions**, and you cannot provide clear evidence to the contrary." 
+        - The importance of a commit history was also reiterated multiple times in the [Guide on Group and Individual Project Assignments](`r guide_Group_URL`).
+    - You put yourself in a vulnerable position by only working on the report. You also **gave up an opportunity to deepen the understanding of the skills** you should have learned from the module. 
+    - While the outcome of the review may not be what you hoped for, I hope this experience helps you improve in the future.
+    - Best wishes
+
+
+    <!--
+  
+    Subject: [Action Required] Re: AF1204 groupYY - Project Group Membership Notification
+
+    Dear XYZ,
+
+    I received an email reporting your lack of contribution to the project work of groupYY. 
+
+    If hard evidence proving your significant contributions to the group work cannot be provided within the next 7 days, your group assignment mark will be reset to 0. Please read the Guide on Group and Individual Project Assignments, especially section 2, 4, and 7.1, for the requirements on the group project. 
+
+    Thank you for your attention and cooperation.
+
+    Regards,
+    Dr Yim 
+
+    ---
+
+    Subject: AF1204 groupYY - Project Group Membership Notification
+    
+    Dear Students,
+
+    This is to notify you of the members in your AF1204 project group and the link to accept your project Group repo on GitHub.
+
+    Group repos are observable by a group's members only. The group repo of a student (e.g., project-group00 if the student belongs to this group) is separate from the student's forked module repo (e.g., rep02-AF1204-[yourGitHubUsername]) — although they both have essentially the same contents at the time of release (namely, the Week 1–4 notebooks).
+
+    The Week 1–4 notebooks in a Group repo serve as templates for students to modify to build their interactive dashboard for the group project. If the members of a group choose to create their own branches to avoid stepping on each other's work in progress, the branches are their development spaces. Those are supposed to be messy areas with experimental files created for trying new things. When the students have reached some milestone outputs, they should integrate the outputs to the main branch for the final submission.
+
+    In contrast, the forked module repo (repoAF1204-) is a student's personal learning space with weekly new materials synced to it. No other students can see the content of that repo. Students typically keep this space organized for learning and avoid filling it with experimental files.
+    You have been added as pending members to the group below. Please take note of your group mates' contact details and reach out to coordinate your project work.
+
+    Project Group YY (groupYY)
+
+    1. XYZ (github_username: xyz)
+    XYZ@bayes.city.ac.uk
+
+    ...
+
+    5. XYZ (github_username: xyz)
+    XYZ@bayes.city.ac.uk
+
+    To confirm your membership, please go to this page to Accept your Group repo: https://classroom.github.com/a/hU2BDDDZ. If you did not report your GitHub username on Moodle, you must carefully locate the correct project group to join on the Accept page, or you would wrongly join another group, blocking some pending member of that group to join. On the other hand, for example, if only two of a five-person group have gone through the confirmation steps, then on GitHub only those two will see each other as members of that Group repo.
+
+    Group members' contributions to a project will be tracked through GitHub's commit system. Students are expected to save their work in progress back to the Group repo from time to time (i.e., commit changes to files on their Codespaces created with the main branch/their own branches of the Group repo back to the the Group repo). GitHub tracks commit activities of group members, which serve as hard evidence to prove their contributions to a project. You will be in a vulnerable position if your group mates dispute your contributions, and you cannot provide clear evidence to the contrary.
+
+    If you still do not have a GitHub account, please follow the instructions on this page to sign up for a free GitHub account and report your GitHub username to us asap.
+
+    Thank you for your cooperation.
+
+    We look forward to reading your group project report due by the end of Week 7.
+
+    Best regards,
+    Dr Yim 
+
+    -->
+
+
+- _**<span style="color:black;">Where can we find the data for the s&p500 and what code do we use because whenever I try run the code, it is saying there is no file?</span>**_
+    - The data is sitting in the `public/` folder of your forked module repo all along since Week 2. Please ask all of your group members to watch the [session recordings](`r lecture_capture_URL`) carefully to learn to load the data. It is also written clearly in the marimo notebooks shared to students. Carefully read each and every code cell, and the explanations in the Markdown cells around it, to learn how to use the code in the shared notebooks.
+    - Please also follow the instructions in the [Guide](`r guide_Group_URL`) on the assignment. In particular,
+        - _Build an interactive dashboard using S&P 500 data, **based on the Week 1–4 notebook templates**_
+    - For example, 
+        - `Wk04w_Dashboard.py` is a functionally working interactive dashboard
+        - Save a copy of it with a different name (e.g., `MyGroup_Dashboard.py`)
+        - Open it and use the Marimo button to turn it into the notebook interface with Markdown and code cells as you see in the session recordings
+        - Search for and read each line with the word "read" to learn how to load the data
+        - Start making changes to this functionally working interactive dashboard **only one line at a time**
+        - Run the code cell that you have changed to make sure your change has not broken the code
+        - If you break the code, seek help from AI on "what's wrong", "got this error", "how to fix", "I want to do [this], please suggest the Python code", ...
+        - If AI's advice cannot lead to a successful fix, **give up that change** and return to the previous code without the broken change — which is a functionally working interactive dashboard 
+        - Experiment with another change (e.g., change a color from green to blue, change the thickness of a line from 0.1 to 0.5, etc) until it is successful
+        - Keep experiment with more successful changes until the successfully changed dashboard is what you'd like to base on to write up the group project report that highlights the new features you have added
+
+
+- _**You gave us feedback about how you tried to see our dashboard app but it didn't work for you. I am not sure why it didn't open from your computer. I just wanted to show you in a video how I get it up on my laptop. Please have a look.**_
+    - "how I get it up on my laptop": This is why your group project did not meet the requirements. It could only work in your laptop — it **cannot run out of the box from a Codespace** created from your GitHub repo.
+    - This module is designed for a cohort of over 300 students. Yet, I am confident what works in  my PC's browser will work in exactly the same way in any of the students' devices. 
+        - GitHub Codespace is a virtual PC with a uniform, predictable environment that works in exactly the way I set it up regardless of the configuration of any PCs used by the students. 
+        - It only relies on a modern browser, which  exists in every modern device people everywhere are using today.
+    - Imagine you prepared a brilliant presentation in your laptop but on the way to a client presentation, it dropped on the floor and broke. You could only use a PC provided by the client. 
+        - I was your rival in competing for the business from this client. I did not even bring my own laptop. I just needed a modern browser from any PC with internet connection. 
+        - You could not get your presentation worked in the client's PC. I had no problem in showing my presentation that worked out of the box in a GitHub Codespace. **Guess who would win the business.** 
+        - Suppose in the presentation, the software engineers of the client were in the audience. They could tell from the tools used which of us had better knowhows and skill sets. 
+    - I can assure you that so far, none of the competing accounting programmes in the UK is capable of delivering a module matching the best-in-class tools I share in this module. 
+
+
+- _**Is a late submission of the Group Project assignment acceptable?**_
+    - You will find that the submission link continues to open for 48 hours after the submission deadline. 
+    - **Submissions after the deadline are late submissions** subject to penalty adjustments **at the lecturers' discretion**. 
+        - A brilliantly completed project that is submitted late can earn less marks than an imperfectly completed project that is submitted on time.
+    - Please note that groupwork is an assessment type not covered by the University's [Extensions and Late Submissions Policy](`r Extensions_LateSubmissions_Policy`) (as stated in its Appendix A). 
+
+
+- _**When writing the report the word count limit is stated to be 1,500 which currently we're around 200 words over. We feel all the information is vital to understanding our problems and how we fixed them so we were wondering how lenient the word count is (if we were to get it down to 1600 for example).**_
+    - Please shrink it down to  1,500 or below. Ask AI to condense the writing and prioritize on the most impressive and important things to retain.
+
+
+- _**When will we know the mark of our group project?**_
+    - According to the university's policy, the turnaround time for releasing the marks of coursework is 15 working days (amounting to three calendar weeks plus bank holidays).
+
+    <!-- Note: Comments must be indented to prevent disrupting the continuation of the previous formatting of the bullet points. -->
+    <!--    
+    - Students can expect to hear about the marks of their group projects by the end of April 7 (given the bank holidays for Good Friday and Easter Monday). 
+    -->
+
+
+- _**I contributed significantly to the code of the group project. Why am I getting a zero mark?**_
+    - First of all, I need to make clear that your actions to **alter other group members' group work unilaterally without proper communication and permission** from them is totally unacceptable behavior. Your actions were recorded on Moodle and GitHub, including the logs and commit history there. 
+    - My request to "take note of your group mates' contact details and reach out to coordinate your project work" was sent in the group repo invitation email on February 18. You gave no explanation to why you did not reply to other active group members until the afternoon of March 12 (three days before the deadline). This was outright **uncooperative and unprofessional** behavior. 
+    - You replaced the report by the active group members by one that was completely different. Yet you listed them on the report as though they contributed and agreed to the content. This was outright **deceptive, dishonest** behavior.  
+    - If you feel the zero mark given to you is unfair, I am happy to pass your case to the Academic Quality and Standards team for a formal review for academic misconduct to return 'justice' to you. ![](img/AcademicMisconduct.png){width=100%}
+    - Please note that worse outcomes could result in your future if you continue the attitude pointed out here. 
+    - Best wishes
+
+
+- _**I noticed that there was a difference in the grades awarded among group members, and I would be grateful if you could clarify how the marks were awarded individually.**_
+    - Zero marks have been given to students who were assigned to a group but did not contribute significantly to the group work, as informed on the cover page of the submitted group project report.
+    - Members of a project group are <span style="color:red;">**jointly responsible for the group work**, and their marks are awarded as such. There is no need to clarify the individual contributions</span> **except when** a member did not contribute significantly and thus should receive a zero mark regardless of the group project mark. 
+    - Other indicators of insignificant contributions include the (lack of) activities in the group repo. Please read the [Guide on Group and Individual Project Assignments](`r guide_Group_URL`), especially **section 2, 4, and 7.1**, for the requirements on the group project.  
+
+
+### 9.2 Individual Project FAQs
+
+- _**Please clarify what the Individual Project assignment is about. I do not know where to start from because I don't know what data to use, what topic to use, ...**_
+    - The purpose of the Individual Project assignment is to encourage students to start preparing the _**very first draft of their personal portfolio webpage that they can continue to polish over the next three years and hopefully by the time they graduate, they would have a highly professional webpage that represents who they are and that they truly feel proud of**_ to showcase in a job interview and to share with prospective employers/work colleagues/business clients/their parents and friends.
+  - Students have all the freedom to prepare this very first draft of their personal portfolio webpage, as long as:
+    (i) it serves the purpose of a personal portfolio webpage as illustrated with the code template shared in the Week 4 coverage, and
+    (ii) it meets the requirements stated in the Guide, especially its sections 3, 4, and 7.2.
+  - For example, suppose students simply replace the CV of Jane Doe in the code template by their CVs and remove the second tab on Passion Projects and the third tab on Personal Interests. This is a minimalist personal portfolio webpage. If the students can prepare such a webpage without breaking the code, they can then follow the very detailed steps near the end of the `Wk04_DataPreparation.py` marimo notebook to export the code as a `html-wasm` file. This will generate a collection of files in a GitHub Codespace, which should be committed back to its connected GitHub repo following the instructions in `Wk04_DataPreparation.py`. The last step is to enable the GitHub Pages function in the GitHub repo (again, following the very detailed step-by-step instructions in `Wk04_DataPreparation.py`). Once finished and waiting for, say, 5 minutes, the URL of the enabled webpage will show up in the Pages page under the Settings page of the GitHub repo page. This is _**a URL that any device with a browser at any place with an internet connection can reach, without any knowledge of Python, marimo, or whatsoever**_.
+  - In the Week 11/12 session, we will have time to go through the steps above again, which will be captured in the Lecture Capture recording/Zoom recording. In case of doubt, students can follow the recording to complete those steps to enable the URL of their personal portfolio webpage.
+  - If students do not know where to start to prepare their personal portfolio webpage, perhaps it is because they are not sure about which parts of themselves they would like to present to a prospective employer (in the case of the hypothetical Jane Doe, she wanted to present her passion projects and personal interests), what they are proud of themselves, what their strengths and weaknesses are, what they really care, etc.
+
+
+- _**Instead of doing the Individual Project assignment on Github Codespaces (and committing and pushing the changes back to my GitHub repo), I have been doing it locally with the VS Code installed in my laptop. Is it okay if I simply upload the finished marimo notebook to my GitHub repo? Do I have to redo the whole thing on GitHub?**_
+    - If in the end it doesn't look like the marimo notebook / webpage is your independent work, then there's not an easy way to provide hard evidence to prove it. 
+    - Please read requirements in the [Guide](`r guide_Indiv_URL`), especially sections 3, 4, and 7.2, and relevant FAQs in section 9.  
+
+
+- _**I submitted the video for the Individual Project assignment on time but I forgot to change the filename according to the format required. So I have uploaded the same video again today with the correct filename although the submission deadline has passed.**_
+    - Technically speaking, this is a late submission because your on-time submission did not meet the filename requirement stated in the [Guide](`r guide_Group_URL`). 
+    - Please also note that the commit history of your GitHub repo will show changes, if any, after the submission deadline. 
+        - Any further change in files related to the personal portfolio webpage will undoubtedly constitute a late submission. 
+
+
+- _**I wanted to let you know that after submitting my video for the Individual Project assignment, I noticed that the first 20 seconds of the recording have no audio due to a microphone issue. The rest of the video plays normally with clear sound. I'm happy to re‑record and re‑upload the video or provide an updated version if allowed. Please let me know what you'd prefer.**_
+    - A submitted assignment will be assessed as it is based on its merit  (e.g., to what extent the requirements stated in the [Guide on Group and Individual Project Assignments](`r guide_Group_URL`) are met). 
+    - It is common sense that students need to check the quality of their work before submission and is responsible for the work they submitted.
+    - FWIW, you will find that the submission link continues to open for 48 hours after the submission deadline. Submissions after the deadline are late submissions [subject to penalty](`r Extensions_LateSubmissions_Policy`). 
+        - A brilliantly completed project that is submitted late can earn less marks than an imperfectly completed project that is submitted on time. 
+
+
+- _**Is it acceptable for the marimo notebook for generating my personal portfolio webpage to be located within the `.devcontainer` folder in the main branch of my repo? If not, how can I move the file to the root directory of the main branch? Tried but unsuccessful.**_
+    - You should not touch the `.devcontainer` folder or files inside; otherwise, you might screw up the configuration of a Codespace.
+    - Just right-click your file and select `Download` to download it to your device and upload it back to the root directory of the main branch.
+    - _**But wouldn’t all the commit history from the original file be lost if I just upload a downloaded file?**_
+        - Short answer is no (you may leave the original file in the `.devcontainer` folder). Just upload a copy of it back to the root directory of the main branch. 
+        - Alternatively, if you could figure it out, there is also a `Save As` option on Codespaces. Ask AI — if you do not know something. I wish that all my students could make the best use of AI after this module.
+
+
+- _**Could you resend the invitation link to the forked module repository for the Individual Project assignment before Sunday**_ `[editorial note: That is, within the next 18 hours]` _**so that I can proceed to complete the assignment? I was unable to join earlier due to some personal circumstances at the time**_ `[editorial note: It has been 2.5 months]` _**and I believe there was a 7-day deadline to join.**_ 
+    - The GitHub Classroom assignment invitation link for creating your forked module repo has been waiting for you to click for a very, very long time! See the [GitHub ecosystem](`r github_ecosystem_section`) section on Moodle.
+    - There's no expiry date set for the invitation link. However, if you had clicked the link before but didn't also click the `View Invitation` button in a follow-up GitHub email to `Accept` or `Decline` the invitation, your repo might be locked as a consequence. 
+        - The `View Invitation` button was **valid for 7 days** even though the **original invitation link has no expiry date**. ![](img/NoLongerHaveAccess.png){width=100%}
+    - If your repo is locked (because you always see the `no longer have access` page but the `View Invitation` button to clear it is no longer valid after 7 days), 
+        - you can consider deleting your GitHub account completely (see `Settings` | `Account` | `Delete account`). Once done, use your school email address to register another GitHub account with a **new username** different from the old one. 
+        - The GitHub Classroom assignment invitation link in the [GitHub ecosystem](`r github_ecosystem_section`) section on Moodle has no expiry and can still be used to create your forked module repo for the new username. 
+        - This time, **remember to click the `View Invitation` button in a follow-up GitHub email immediately after** clicking the GitHub Classroom assignment invitation link.
+
+
+- _**After clicking the GitHub Classroom assignment invitation link to the forked module repo and the `Authorize GitHub Classroom` and `Accept this assignment` buttons on the next two pages, I saw a `no longer have access` page in the end. What should I do?**_ ![](img/AfterClassroomInviteLinkAndLoggedIn.png){width=80%} 
+    - ![](img/AcceptThisAssignmentButton.png){width=100%}
+    - If you see the `no longer have access` page right after **the first time** you click the invitation link, **don't be alarmed** by it because
+        - (i) the repo is not ready for you to access until it has been created, and it takes a bit of time to complete the creation;
+        - (ii) when the repo has been created, a follow-up GitHub email containing a `View Invitation` button to `Accept` or `Decline` the invitation will be sent to you. You must click the button immediately and the `Accept invitation` button on the next page, or the repo might be **locked up after 7 days**. 
+            - _Note_: If locked up, it might require you to delete your GitHub account, register again with a different GitHub username, and redo everything in one go to gain access to the forked module repo. 
+        - ![](img/MustAcceptInvitationIn7Days.png){width=90%} 
+        - ![](img/MustNextClickAcceptCollaborationOnInvitationPage.png){width=100%}
+    - After completing the process above, you will have access to your forked module repo, which has a URL of the following standard format:  
+    `https://github.com/BayesUG-AI/repoAF1204-[yourGitHubUsername]`
+        - where the placeholder `[yourGitHubUsername]` should be replaced by your actual GitHub username (without the square brackets).
+
+
+- _**When I tried to load my forked module repo at the standard URL, it returned a 404 error page. What can I do?**_ 
+    - Your forked module repo is a private repo, which means you cannot see the repo unless in **the browser in concern**, you have logged into GitHub using the **correct** GitHub username (_Note:_ Some students have registered multiple GitHub accounts with different usernames.) 
+    - ![](img/GitHubSignIn.png){style="width:50%;"}
+
+
+- _**Can I use the Dashboard that my project group has produced for the Group Assignment in my Individual Assignment, such as linking to it from one of the tabs of my portfolio webpage?**_
+    - Of course you can. That said, if a painting by Vincent Van Gogh is linked to a student's website, the grade won't be affected by the quality of the painting itself.
+
+
+- _**Is it okay if my video report for the Individual Project assignment is a few seconds above the maximum threshold?**_
+    - Anything beyond the 3-minute limit will be ignored.
+
+
+- _**Will we be assessed on our communication and presentation skills for the individual project assignment when recording ourselves presenting our webpages?**_
+    - If the skills are below the level required for the grader to appreciate your achievement in the assignment, that would be problematic. For example, if you speak so fast that the grader cannot follow you, how could the grader understand your achievement? Similarly, if you have a very strong accent, perhaps it would be best to also include subtitles in understandable English in the video.
+    - Generally speaking, the clearer the communication/presentation, the better — because the grader can understand your achievement in the assignment more easily. For the expectation on the assignment, please read the [Guide on Group and Individual Project Assignments](`r guide_Indiv_URL`) from start to end, especially **sections 3, 4, and 7.2** and relevant **FAQs in section 9**. Thanks.
+
+
+- _**I'd like to know whether the final submitted `.mp4` recording displaying the portfolio webpage with a voiceover is allowed to be edited to the extent of removing any portions where I stammer or falter, or is the final cut required to be one unedited length of video? Of course, no extraneous or unnecessary edits would be made.**_
+    - Yes, you may edit the video for the said purposes.
+
+
+- _**Can we record our video using Teams, instead of Zoom? Still an mp4 file.**_
+    - I do not know how to use Teams to record videos and do not have time to test it.
+    - Please make sure that you read the [Guide on Group and Individual Project Assignments](`r guide_Group_URL`) from start to end, especially **sections 3, 4, and 7.2**.
+    - If you feel Teams can meet all the requirements, then you are free to use it to meet the requirements. 
+
+
+- _**For the video, are we supposed to only explain the website or do we also explain the code that got us there?**_
+    - You can certainly show in the video your code/what you tried because it does help us understand your learning journey. 
+    - However, 3 minutes are not long. Be mindful of what you show. Focus on things that can impress the audience most. 
+
+
+- _**Can I show in the video something that works in my marimo notebook although it does not work in the exported webpage?**_
+    - You can certainly show in the video what you tried because it does help us understand your learning journey. 
+    - But I trust you appreciate that a student who could make things work on their webpage should receive a higher mark than another student who could only make those things work in a marimo notebook (but not in an external webpage).
+    - When you share a URL to your boss, you assume nothing but a modern browser with internet connection.  If you share a marimo notebook, your boss needs to know Python and marimo to be able to see the outcome of your work. 
+
+
+- _**The marimo notebook generating my Porfolio webpage ran correctly inside a Codespace. However, whenever I load it at the Github Pages website URL, it just shows the Jane Doe webpage. I have used AI to help me fix this problem; however, I have not been able to rectify the issue. Any suggestion?**_
+    - Are you still using this command when your webpage is not `Wk04x_MyPortfolio.py`?
+    ```bash
+    marimo export html-wasm Wk04x_MyPortfolio.py -o docs --sandbox --force
+    ```
+    - Please see if the two videos and additional info in the Moodle section [ASSESSMENT and FEEDBACK: Individual Project Assignment](`r guide_Indiv_URL`) might be helpful to you.
+    
+
+- _**I ran into a problem shown in the screenshot below. What should I do?**_ ![](img/SettingsOfGitHubAccount_redacted.png){width=100%}
+
+    - It looks to me that you did not follow the instructions exactly to click on the Settings of your repo. Did you instead click the Settings of your GitHub account?
+
+
+- _**Each time I try to open the URL of my webpage, only the title appears on the page. Even after waiting for a long time or refreshing multiple times, the page still doesn’t load properly. What can I do?**_
+    - In the top right corner of the webpage, there is <span style="color:red;">a triple-dot button (`...`). Click on it and select `Show Code`</span>. You will see the code of the marimo notebook generating your page and any error messages. This should be helpful for debugging.
+    - In particular, if the first error message says something like the `.csv` data file `cannot be found`, you should study very, very carefully how the `Wk04x_MyPortfolio.py` notebook works, as well as the detailed information provided in `Wk04_DataPreparation.py` &mdash; especially the part concerning **raw gist URL**  &mdash; to see whether you could implement that data loading approach. 
+
+
+- _**I am unable to record my 3-minute video presentation as my webpage cannot be accessed at the default URL. I would really appreciate your guidance on how to resolve this, as the situation is becoming quite stressful.**_
+    - If I were you, I would first create a new Codespace to verify whether I can execute the shared code template `Wk04x_MyPortfolio.py` as a marimo notebook without errors, as a web app, and as an external webpage, just like in the videos provided in the [ASSESSMENT and FEEDBACK: Individual Project Assignment](`r guide_Indiv_URL`) section on Moodle.
+    - Once the above is verified, I would
+        - Save a copy of `Wk04x_MyPortfolio.py` as, say, `MyPortfolio.py`
+        - Replace Jane Doe's CV in `MyPortfolio.py` by your CV _**very, very carefully without breaking the code**_
+        - Verify that you can execute `MyPortfolio.py` as a marimo notebook without errors 
+        - Verify that you can run `MyPortfolio.py` as a web app
+        - Follow the instruction in the `Wk04_DataPreparation.py` to export `MyPortfolio.py` as an external webpage
+        - Recording the 3-minute video as required
+    - The above would meet the assignment requirements. Please also see if any FAQs in section 9 of the Guide could be useful to you. 
+
+
+- _**My webpage is not loading at the default URL. However, when I used the `marimo run` command in the terminal, a webpage did load up at a different URL `http://glorious-acorn-g4955rv67qqp2wvpv-2718.app.github.dev`. May I record my 3-minute video using this webpage instead?**_
+    - This does not meet the ultimate requirement of creating an externally reachable webpage. However, if this is the best you can achieve, we will consider **meaningful unsuccessful efforts**.  
+    - Just for you to know, only you can reach `http://glorious-acorn-g4955rv67qqp2wvpv-2718.app.github.dev`. It is not an external webpage URL reachable by others. 
+
+
+- _**When I executed inside a Codespace the marimo notebook generating my Portfolio webpage, it ran without any error. However, when I exported it in html-wasm and load the webpage at the default URL, it returned an error saying that the .csv data file could not be found. What should I do?**_
+    - This sounds like a data loading issue. FWIW, please study very, very carefully how the `Wk04x_MyPortfolio.py` notebook works, as well as the detailed information provided in `Wk04_DataPreparation.py`, especially the part concerning **raw gist URL** to see if you could implement that data loading approach. 
+
+
+- _**Am I allowed to include a small LLM/AI feature for the Individual Project assignment because I wanted to incorporate coding skills in Week 9 after reviewing the Week 11 slides summarising what topics we learnt this term?**_
+    - Before you proceed, please see the risk highlighted in the information given in the Moodle section [ASSESSMENT and FEEDBACK: Individual Project Assignment](`r guide_Indiv_URL`)
+    - If the risk is properly recognized, you are free to apply any skills covered in this module as long as your webpage meets the requirements. See `r slides_27_28` of the [Week 11 slides](`r Week11_slides_URL`).
+
+
+- _**I have completed my personal portfolio webpage. All the interactive features work perfectly when running inside a Codespace. However, the live GitHub Pages website fails to load the interactive elements correctly. I think this is due to the limitations of HTML-WASM. Is it acceptable if my video report simply demonstrates the webpage's full functionality inside a Codespace?**_
+    - You can spare a bit of time in the video to discuss these efforts, and we will take them into account. That said, they should not overshadow the ultimate requirement of the assignment, which is an externally accessible webpage that may be viewed anywhere with a modern browser. 
+    - You also need to provide clearer evidence to substantiate the claim that the reason for the features not working is indeed due to the limitations of the HTML-WASM format.
+    - Additionally, as there is still time before submission, this is also an opportunity for you to show your risk management ability: 
+        - How can you revise the features to still serve the purpose of showcasing who you are within the limitations of HTML-WASM format? For example, if live fetching of information is not supported, can you prepare a dataset in advance to serve a similar function?
+    - Please also see if my replies below to other students could be relevant to you too.
+        - _It looks like you are trying to do something that is too advanced for you to handle, or outright technically impossible. I suggest you scale back your ambitions. In any case, you need to cut loss in a day or two and pursue a path that is practically workable._
+        - _FWIW, have a look at the limitations here:_ `r marimo_limitations`
+
+
+- _**I followed a video on Moodle to export my marimo notebook to `docs/`. But everytime I try to commit and sync the changed files in my Codespace back to my GitHub repo, a message with these three buttons appears: `Open git log`, `Show command output`, `Cancel`. It does not let me finish committing. What can I do?**_
+    - Download the marimo notebook to your device.
+    - Create a new Codespace from your GitHub repo. 
+    - Upload the previously downloaded marimo notebook to this new Codespace. 
+    - Go on with the usual process starting with the export command.
+
+
+- _**I followed the steps in a video provided on Moodle to delete the `docs/` folder on GitHub before the `marimo export` command. But now my entire codespace doesn't seem to open at all and shows an error. Is there anyway to revert the commit and make the codespace open again?**_
+    - It looks like you must have accidentally done other things (e.g., unconsciously deleted another important folder/file). Otherwise, deleting `docs/` alone would not impact the Codespace itself. 
+        - Or, maybe GitHub Codespaces services happened to be down. 
+        - Or, you happened to run out of credits around the same time. 
+    - Assuming (i) none of the above was true and (ii) you followed the advice to commit your work back to the GitHub repo in each session of work, 
+        - the marimo notebook generating the webpage should still be in your GitHub repo. Simply create a new Codespace from your repo and do the work as usual. 
+    - I believe if you simply follow the written instructions in the main Week 4 marimo notebook, 
+        - things will work even without deleting the `docs/` folder first. 
+        - If you deleted the `docs/` folder **after** the export command, of course it would not work because the exported webpage is created in the `docs/` folder. 
+
+
+- _**Which part of the Week 7 coverage on Web Scraping and Automation Pipeline can I adopt to showcase my coding skills in the Individual Project assigment, considering that the assignment is to create a personal portfolio webpage?**_
+    - For example, show the findings of a passion project utilising the webcrawling and document analysis techniques covered in Week 7. 
+
+
+- _**Due to a family issue, I did not have enough time before the submission deadline to produce a quality piece of work. Can you extend the submission deadline for me given my special situation?**_
+    - I am sorry to hear about your difficult situation.
+    - My advice is that you should submit an **extenuating circumstance application** with the Course Office. Please contact the Stage-1 Course Officer for details about the application process. 
+        - As far as I understand, for students with valid reasons and supporting evidence, the Assessment Board to be held in late June / early July typically will grant a resit without a cap -- so this is equivalent to a first-time attempt. 
+        - The resit normally will be held online in August; physical presence on campus is not required.     
+    - Students were aware of the Individual Project assignment and its submission deadline from day 1 of the module. The [Guide on Group and Individual Project Assignments](`r guide_Group_URL`) was released before mid-February. The necessary skills required to complete this assignment were covered in **Week 4**. 
+        - There is no reason students could not submit the assignment earlier than the submission deadline tonight (in **Week 12**) &mdash; unless it was due to extenuating circumstances.
+    - FWIW, you will find that the submission link continues to open for 48 hours after the submission deadline. Submissions after the deadline are late submissions [subject to penalty](`r Extensions_LateSubmissions_Policy`). 
+        - A brilliantly completed project that is submitted late can earn less marks than an imperfectly completed project that is submitted on time. 
+    - Time management is essential, both for academic assignments and future professional responsibilities.
+    - Best wishes
+
+
+    <!-- Note: Comments must be indented to prevent disrupting the continuation of the previous formatting of the bullet points. -->
+    <!--
+    - You are advised to submit an extension request with the Course Office. According to University Policy, 
+        - "Late submission occurs when a piece of assessed work is submitted after the original submission deadline or an extended deadline."
+        - "Work submitted for assessment more than 48 hours after the submission deadline will receive a mark of zero."
+        - "Work submitted for assessment up to 48 hours after the submission deadline will receive a penalty deduction of 10 percentage points, to a minimum of the pass mark (for this assessment component), if the work is of a pass standard."
+            - "The late penalty is calculated as a deduction of percentage points and not a percentage of the original mark. For example, a mark of 60% will be reduced to 50% and not 54% (10% of 60 equates to 6)." 
+        - "You can request up to three extensions to individual assessment deadlines in an academic year."
+        - "once you have submitted an extension request you cannot recall the request even if you do not use it."
+        - "If no outcome is received by the submission deadline, you are advised to submit the latest version of your work pending a formal response."
+        - "Requests for extension should be submitted at least 1 working day before the assessment deadline."
+        - "Extension requests will be considered by a designated Professional Services Staff member. The decision will usually be communicated to the you within 2 working days."
+        - "Some assessment types cannot be submitted late (Appendix A) and a late submission would constitute a fail unless a successful extenuating circumstance claim was in place."
+            - Group work is among those that cannot be submitted late
+        - Work which has been received late but within the permitted timeframe outlined above and is not of a pass standard, will not be subject to a penalty. 
+    -->
+
+
+- _**I was looking to submit my Individual Project assignment on moodle as the 48-hour window for late submissions still had not closed. However, the submission link did not let me up upload the video. I have attached it here on the email as proof of my work being done before the 48-hour window. Please let me know if there is another way I should send my work.**_
+    - Your work does not meet a number of the assignment requirements. Please see details in the [Guide on Group and Individual Project Assignments](`r guide_Group_URL`), especially section 3, 4, and 7.2. 
+        - In particular, you would not be able to submit a `.mov` file on Moodle since the requirement of the `.mp4` format was strictly enforced. 
+    - We also required the webpage to be fully working at the default URL(s) in the standard format. The GitHub username part of your video filename would let us identify the URL of your webpage. 
+        - As of now, you have not reported your GitHub username on Moodle as required despite my repeated requests since the term started.  
+    - If you want to pursue the "late within 48 hours" route, you need to provide me the URL of your GitHub repo from which you created the Codespace used to complete your assignment. 
+        - The commit history of the repo needs to show that files related to the personal portfolio webpage have not been changed after 48 hours following the original submission deadline. 
+
+
+- _**[editorial note: email received 4 days after the submission deadline] I have not been able to submit anything for the Individual Project assignment. This is not because I have not done everything to the best of my ability to complete the assignment. It seems that there is an internal issue with GitHub and marimo notebook. I have attached some evidence of the problems that I was experiencing. I do want to communicate the reality of completing this coursework, from a student that actually tried their best but with an unexplainable and unpleasant result. Please let me know of the next steps and what can be done to change this result.**_
+    - I am afraid the 48-hour late submission window has closed. According to the University's [Extensions and Late Submissions Policy](`r Extensions_LateSubmissions_Policy`), a **zero mark** will be given. 
+        - However, as far as I understand, for cases like this, the Assessment Board to be held in late June / early July typically will grant a resit. The resit normally will be held online in August; physical presence on campus is not required. 
+        - Please contact the Stage-1 Course Officer should you have any questions about the resit. 
+    - According to **Moodle logs**, the last moment you visited Moodle on the date of the submission deadline (April dd) was around 5pm. In your email sent at 0:57 on April dd+1, you reported an antivirus scanning error that prevented you from completing the video submission. 
+        - Later that day, I replied and requested you to "resubmit your video file on Moodle by 23:59". **You did not follow my request**. The next time you visited Moodle was around 5:30pm yesterday (April dd+4). 
+    - Because your original attempt to submit the video was after the deadline (23:59 on April dd), it would have been a late submission even if it went through. 
+        - Since you were ready to submit the video in the first hour of April dd+1, there was no reason why you could not resubmit it as soon as you received my email reply. 
+        - Your claims concerning coding issues are not relevant here given the timings pointed out. 
+    - Since you visited the Moodle section with the submission link on April dd and dd+1, you must have seen the information given there:
+        - If your webpage does not load correctly, it might be due to the underlying marimo notebook is erroneous. First of all, **verify** that 
+            - The marimo notebook can be executed from start to end without error
+            - You can `marimo run` the notebook as a web app successfully
+        - The above are **necessary (but not sufficient) conditions** for the webpage generated by the marimo notebook to load successfully.
+            - If you try to use advanced packages in the webpage, there's a high chance that it would not work because of the limitations of recreating the marimo environment in browser memory using WASM (the underlying technology that lets marimo's reactive features work in a browser).  
+            - See the limitations mentioned here: `r marimo_limitations`
+    - Additionally, you must have also seen the instruction to "read the Guide on Group and Individual Project Assignments from start to end, especially sections 3, 4, and 7.2 and **relevant FAQs in section 9**", which include the following advice:
+        - "as there is still time before submission, this is also an opportunity for you to show your risk management ability:
+            - How can you revise the features to still serve the purpose of showcasing who you are within the limitations of HTML-WASM format? For example, if live fetching of information is not supported, can you prepare a dataset in advance to serve a similar function?
+        - Please also see if my replies below to other students could be relevant to you too.
+            - _It looks like you are trying to do something that is too advanced for you to handle, or outright technically impossible. I suggest you scale back your ambitions. In any case, you need to cut loss in a day or two and pursue a path that is practically workable._"
+    >> a student that actually tried their best
+    - To determine whether you had tried your best, please let me know the answers of these questions:
+        - When did you start working on the Individual Project assignment? 
+        - How often did you visit the **drop-in helpdesk sessions** to seek help?
+    - Students were aware of the Individual Project assignment and its submission deadline from day 1 of the module. The Guide on Group and Individual Project Assignments was released before mid-February. The necessary skills required to complete this assignment were covered in **Week 4**.
+        - About fifty students submited the assignment at least two days earlier than the submission deadline in **Week 12**. 
+    - Time management is essential, both for academic assignments and future professional responsibilities.     
+        - I hope this experience helps you approach future deadlines more effectively.
+
+
+- _**I am experiencing technical difficulties when trying to upload my video report to Moodle. Despite the file being within the size limit and in the correct format, the upload is not completing successfully. Would it be acceptable for me to submit the video via email?**_
+    - So far, you are the only one reporting this. Your email was sent at 2:17am — maybe that was a maintenance time of the IT equipment. 
+    - Please try again, maybe at a different time, with a different location/device (e.g., use a campus PC).
+
