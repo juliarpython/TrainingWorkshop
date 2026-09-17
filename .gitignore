@@ -30,6 +30,9 @@ lib/
 # R_library/fastglm/libs/fastglm.so
 
 R_library/_cache
+R_library/languageserver/help
+R_library/languageserver/benchmarks
+#R_library/languageserver/Meta
 
 # Distribution / packaging
 .Python
