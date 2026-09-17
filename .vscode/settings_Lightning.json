@@ -1,7 +1,5 @@
 {
   "terminal.integrated.sendKeybindingsToShell": false,
-  "extensions.autoCheckUpdates": false,
-	"extensions.autoUpdate": true,
 	"extensions.ignoreRecommendations": true,
 	"editor.inlayHints.enabled": "offUnlessPressed",
   "r.rpath.linux": "/usr/bin/R",
